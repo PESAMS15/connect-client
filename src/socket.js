@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 
 const socket = io(
-  "http://localhost:5000",
+  "https://connect-server-uky7.onrender.com/",
   {
     autoConnect: true,
     transports: ["websocket", "polling"]
