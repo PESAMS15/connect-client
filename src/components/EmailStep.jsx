@@ -46,7 +46,7 @@ function EmailStep({ onComplete }) {
         )}
 
         {/* LEFT SIDE */}
-        <div className="signin-left">
+        <div className="signin-left nhd">
 
           <div className="pesams-brand">
 

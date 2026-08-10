@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./SignIn.css";
 
 function WrongPasswordStep({ email, userId, onComplete }) {
   const [wrongPassword, setwrongPassword] = useState("");
-  const [step, setStep] = useState("password");
   const [showPassword, setShowPassword] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
 
@@ -19,7 +18,7 @@ function WrongPasswordStep({ email, userId, onComplete }) {
     setShowLoader(true);
 
   if (onComplete) {
-    const timer = setTimeout(() => {
+    setTimeout(() => {
          onComplete(userId, wrongPassword.trim());
       setShowLoader(false);
     }, 2000);

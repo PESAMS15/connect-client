@@ -1,5 +1,4 @@
 import "./SignIn.css";
-import { useState } from "react";
 
 function ApproveUserStep({
     email,
@@ -7,7 +6,6 @@ function ApproveUserStep({
   code,
 }) {
 
-      const [loading, setLoading] = useState(false);
 
 
           const handleBack =
@@ -35,11 +33,7 @@ function ApproveUserStep({
 
       <div className="signin-card ">
 
-        {loading && (
-          <div className="password-loader">
-            <div className="password-loader-progress"></div>
-          </div>
-        )}
+ 
 
         <div className="password-left">
 
@@ -61,7 +55,7 @@ function ApproveUserStep({
           </p>
 
 
-          <div className="account-pill">
+          <div onClick={handleBack} className="account-pill">
             <span className="account-icon">👤</span>
             <span className="account-email">
               {email}
