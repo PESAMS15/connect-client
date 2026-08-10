@@ -16,7 +16,6 @@ const [selectedUser, setSelectedUser] = useState(null);
 
 const [userDevice, setUserDevice] = useState("");
 const [code, setCode] = useState("");
-const [approving, setApproving] = useState(false);
 
 
   // ======================================
@@ -105,80 +104,7 @@ const [approving, setApproving] = useState(false);
   // APPROVE USER
   // ======================================
 
-  const approveUser = async () => {
 
-  if (!selectedUser) {
-    return;
-  }
-
-
-  if (
-    !userDevice.trim() ||
-    !code.trim()
-  ) {
-
-    alert(
-      "Please enter device and code"
-    );
-
-    return;
-  }
-
-
-  try {
-
-    // setApproving(true);
-
-
-    await axios.patch(
-      `https://connect-server-uky7.onrender.com/api/admin/approve/${selectedUser._id}`,
-      {
-        userDevice:
-          userDevice.trim(),
-
-        code:
-          code.trim()
-      }
-    );
-
-
-    // Remove from pending users
-
-  
-
-    // Close modal
-
-    setShowApproveModal(false);
-
-    setSelectedUser(null);
-
-    setUserDevice("");
-
-    setCode("");
-
-  }
-
-  catch (error) {
-
-    console.log(
-      "Approval error:",
-      error
-    );
-
-    alert(
-      error.response?.data?.message ||
-      "Approval failed"
-    );
-
-  }
-
-  finally {
-
-    // setApproving(false);
-
-  }
-
-};
 
 
   // ======================================

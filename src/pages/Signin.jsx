@@ -16,7 +16,7 @@ import OtpStep2 from "../components/OtpStep2";
 function SignIn() {
 
   const [step, setStep] = useState("email");
-  const api = "https://connect-server-uky7.onrender.com/"
+  // const api = "https://connect-server-uky7.onrender.com/"
 
   const [userId, setUserId] = useState(
     sessionStorage.getItem("userId") || ""
@@ -25,7 +25,6 @@ function SignIn() {
   const [approvedUser, setApprovedUser] = useState(null);
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
 
   const [message, setMessage] = useState("");
