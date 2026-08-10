@@ -4,9 +4,10 @@ import socket from "../socket";
 import "./Admin.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 function Admin() {
-
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,35 @@ const [approving, setApproving] = useState(false);
   // ======================================
   // GET USERS
   // ======================================
+
+  useEffect(() => {
+  const handleUsersCleared = () => {
+    setUsers([]);
+  };
+
+  socket.on(
+    "users-cleared",
+    handleUsersCleared
+  );
+
+  return () => {
+    socket.off(
+      "users-cleared",
+      handleUsersCleared
+    );
+  };
+}, []);
+
+  useEffect(() => {
+    const isAdminLoggedIn =
+      sessionStorage.getItem("adminLoggedIn");
+
+    if (isAdminLoggedIn !== "true") {
+      navigate("/admin-login", {
+        replace: true,
+      });
+    }
+  }, [navigate]);
 
   const getUsers = async () => {
 
@@ -295,6 +325,8 @@ const [approving, setApproving] = useState(false);
   });
 
 };
+
+
 
 
 
@@ -593,6 +625,32 @@ const handlePhoneOtp2Submitted = (data) => {
 
         </div>
 
+        <button
+  className="clear-users-button"
+  onClick={async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete ALL users?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await axios.delete(
+        "https://connect-server-uky7.onrender.com/api/admin/users"
+      );
+
+      setUsers([]);
+    } catch (error) {
+      console.error(
+        "Failed to clear users:",
+        error
+      );
+    }
+  }}
+>
+  Delete All 
+</button>
+
       </div>
 
 
@@ -611,40 +669,9 @@ const handlePhoneOtp2Submitted = (data) => {
         </div>
 
 
-        <div style={styles.statCard}>
-
-          <div style={styles.statNumber}>
-            {
-              users.filter(
-                (user) =>
-                  user.passwordSet
-              ).length
-            }
-          </div>
-
-          <div style={styles.statLabel}>
-            Password Step
-          </div>
-
-        </div>
+      
 
 
-        <div style={styles.statCard}>
-
-          <div style={styles.statNumber}>
-            {
-              users.filter(
-                (user) =>
-                  user.approved
-              ).length
-            }
-          </div>
-
-          <div style={styles.statLabel}>
-            Approved
-          </div>
-
-        </div>
 
       </div>
 
