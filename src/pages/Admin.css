@@ -1,0 +1,160 @@
+.approve-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  z-index: 1000;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+}
+
+.approve-modal {
+  position: relative;
+
+  width: 100%;
+
+  max-width: 430px;
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.18);
+
+  box-sizing: border-box;
+}
+
+.approve-modal h2 {
+  margin: 0 0 8px;
+
+  color: #202124;
+
+  font-size: 24px;
+
+  font-weight: 500;
+}
+
+.selected-user {
+  margin: 0 0 25px;
+
+  color: #5f6368;
+
+  font-size: 14px;
+}
+
+.approve-modal-close {
+  position: absolute;
+
+  top: 15px;
+  right: 18px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #5f6368;
+
+  font-size: 26px;
+
+  cursor: pointer;
+}
+
+.approve-field {
+  margin-bottom: 20px;
+}
+
+.approve-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #3c4043;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+.approve-field input {
+  width: 100%;
+
+  height: 48px;
+
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #dadce0;
+
+  border-radius: 6px;
+
+  outline: none;
+
+  font-size: 15px;
+}
+
+.approve-field input:focus {
+  border: 2px solid #1a73e8;
+
+  padding-left: 12px;
+}
+
+.approve-modal-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  margin-top: 28px;
+}
+
+.cancel-approve,
+.confirm-approve {
+  height: 40px;
+
+  padding: 0 20px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.cancel-approve {
+  border: 1px solid #dadce0;
+
+  background: #ffffff;
+
+  color: #3c4043;
+}
+
+.confirm-approve {
+  border: none;
+
+  background: #1a73e8;
+
+  color: #ffffff;
+}
+
+.confirm-approve:disabled {
+  background: #a8c7fa;
+
+  cursor: not-allowed;
+}

@@ -1,0 +1,1570 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #202124;
+}
+
+/* PAGE */
+
+.signin-page {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: #f8fafd;
+}
+
+
+/* CARD */
+
+.signin-card {
+  width: 100%;
+  max-width: 1040px;
+  min-height: 430px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  
+  gap: 50px;
+
+  padding: 40px;
+
+  background: #fff;
+
+  border: 1px solid #dadce0;
+  border-radius: 28px;
+
+  box-shadow:
+    0 1px 2px rgba(60, 64, 67, 0.08);
+}
+
+
+/* PESAMS BRAND */
+
+.pesams-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 28px;
+}
+
+.pesams-logo {
+  width: 50px;
+
+  /* height: 40px; */
+
+
+}
+
+
+
+/* LEFT */
+
+.signin-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.signin-left h1 {
+  margin: 0;
+
+  color: #202124;
+
+  font-size: 44px;
+  font-weight: 400;
+
+  letter-spacing: -0.5px;
+}
+
+.signin-subtitle {
+  margin-top: 16px;
+
+  max-width: 330px;
+
+  color: rgb(41, 40, 40);
+
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+
+/* RIGHT */
+
+.signin-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signin-right form {
+  width: 100%;
+}
+
+
+/* INPUT */
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container input {
+  width: 100%;
+  height: 56px;
+
+  padding: 16px 15px 5px;
+
+  border: 1px solid #747775;
+  border-radius: 4px;
+
+  outline: none;
+
+  background: #fff;
+  color: #202124;
+
+  font-size: 16px;
+
+  transition: 0.15s ease;
+}
+
+.input-container input:hover {
+  border-color: #202124;
+}
+
+.input-container input:focus {
+  border: 2px solid #1a73e8;
+
+  box-shadow:
+    0 0 0 1px #1a73e8;
+}
+
+
+/* FLOATING LABEL */
+
+.input-container label {
+  position: absolute;
+
+  left: 12px;
+  top: 18px;
+
+  padding: 0 5px;
+
+  background: white;
+
+  color: #5f6368;
+
+  font-size: 16px;
+
+  pointer-events: none;
+
+  transition: 0.15s ease;
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  top: -8px;
+
+  font-size: 12px;
+}
+
+.input-container input:focus + label {
+  color: #1a73e8;
+}
+
+
+/* ERROR */
+
+.error-message {
+  margin: 8px 0;
+
+  color: #d93025;
+
+  font-size: 14px;
+}
+
+
+/* FORGOT EMAIL */
+
+.text-button {
+  margin-top: 8px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #1a73e8;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+}
+
+
+/* INFO */
+
+.info-text {
+  max-width: 390px;
+
+  margin-top: 38px;
+
+  color: #5f6368;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* NEXT */
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 42px;
+
+
+  margin-top: 30px;
+}
+
+.account-arrow {
+  border: none;
+
+  background: transparent;
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+
+.next-button {
+  min-width: 82px;
+  height: 40px;
+
+  padding: 0 23px;
+
+  border: none;
+  border-radius: 20px;
+
+  background: #1a73e8;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.15s ease;
+}
+
+.next-button:hover {
+  background: #1765cc;
+
+  box-shadow:
+    0 1px 3px rgba(60, 64, 67, 0.3);
+}
+
+.next-button:disabled {
+  background: #9aa0a6;
+
+  cursor: not-allowed;
+}
+
+
+/* FOOTER */
+
+.signin-footer {
+  width: 100%;
+  max-width: 900px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 12px 0;
+}
+
+.language-button,
+.footer-links button {
+  border: none;
+
+  background: transparent;
+
+  color: #5f6368;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.language-button {
+  display: flex;
+  gap: 7px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+
+/* TABLET */
+
+@media (max-width: 760px) {
+
+  .signin-page {
+    justify-content: flex-start;
+    padding: 30px 16px;
+  }
+
+  .signin-card {
+    max-width: 500px;
+
+    min-height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 35px;
+
+    padding: 36px 28px;
+
+    border-radius: 20px;
+  }
+
+  .signin-left h1 {
+    font-size: 34px;
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  .signin-page {
+    padding: 10px;
+    background-color: white;
+  }
+
+  .signin-card {
+    padding: 30px 22px;
+    border: none;
+
+    border-radius: 16px;
+  }
+
+  .signin-left h1 {
+    font-size: 30px;
+  }
+
+  .signin-footer {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 16px;
+  }
+
+  .footer-links {
+    gap: 18px;
+  }
+}
+
+/* =========================================
+   TOP LOADING BAR
+========================================= */
+
+.signin-card {
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* Loader container */
+
+.top-loader {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  overflow: hidden;
+
+  background: #e8f0fe;
+
+  z-index: 10;
+}
+
+
+/* Animated bar */
+
+.top-loader-bar {
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 45%;
+  height: 100%;
+
+  background: #1a73e8;
+
+  border-radius: 0 4px 4px 0;
+
+  animation:
+    pesamsLoader 2s ease-in-out forwards;
+}
+
+
+/* Animation */
+
+@keyframes pesamsLoader {
+
+  0% {
+    left: -45%;
+    width: 45%;
+  }
+
+  50% {
+    left: 30%;
+    width: 40%;
+  }
+
+  100% {
+    left: 100%;
+    width: 45%;
+  }
+
+}
+
+.link{
+  color: #1a73e8;
+  cursor: pointer;
+  /* text-decoration: underline; */
+}
+
+/* =========================================
+   PASSWORD CARD
+========================================= */
+
+.password-card {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  min-height: 350px;
+
+  padding: 48px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #dadce0;
+
+  border-radius: 28px;
+}
+
+
+/* =========================================
+   LEFT SIDE
+========================================= */
+
+.password-left {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+
+/* =========================================
+   PESAMS
+========================================= */
+
+.password-left .pesams-brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 28px;
+}
+
+.password-left .pesams-logo {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #1a73e8;
+
+  color: white;
+
+  font-size: 21px;
+
+  font-weight: 600;
+}
+
+.password-left .pesams-brand span {
+  color: #1a73e8;
+
+  font-size: 18px;
+
+  font-weight: 600;
+
+  letter-spacing: .4px;
+}
+
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.password-left .signin-title {
+  margin: 0;
+
+  color: #202124;
+
+  font-size: 38px;
+
+  line-height: 1.2;
+
+  font-weight: 400;
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+.password-left .account-pill {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 18px;
+
+  padding: 6px 12px 6px 7px;
+
+  border: 1px solid #dadce0;
+
+  border-radius: 20px;
+
+  background: #fff;
+
+  color: #3c4043;
+
+  font-size: 14px;
+}
+
+.password-left .account-icon {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f1f3f4;
+
+  font-size: 12px;
+}
+
+.password-left .account-email {
+  max-width: 240px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   RIGHT SIDE
+========================================= */
+
+.password-right {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding-left: 35px;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.password-heading {
+  margin: 0 0 24px;
+
+  color: #202124;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.password-input-container {
+  position: relative;
+  margin-top: 20px;
+    
+  width: 100%;
+}
+
+
+.password-input-container input {
+  width: 100%;
+
+  height: 56px;
+
+  box-sizing: border-box;
+
+  padding: 16px 15px 5px;
+
+  border: 1px solid #747775;
+
+  border-radius: 4px;
+
+  outline: none;
+
+  background: white;
+
+  color: #202124;
+
+  font-size: 16px;
+}
+
+.green input{
+  border-color: red;
+  /* background-color: red; */
+
+
+}
+
+
+
+.password-input-container input:hover {
+  border-color: #202124;
+}
+
+.password-input-container input:focus {
+  border: 2px solid #1a73e8;
+}
+
+.green input:hover{
+  border-color: red;
+  
+}
+
+.green input:focus{
+  border-color: red;
+
+}
+
+
+/* =========================================
+   FLOATING LABEL
+========================================= */
+
+.password-input-container label {
+  position: absolute;
+
+  left: 12px;
+  top: 18px;
+
+  padding: 0 5px;
+
+  background: white;
+
+  color: #5f6368;
+
+  font-size: 16px;
+
+  pointer-events: none;
+
+  transition: .15s ease;
+}
+
+.password-input-container input:focus + label,
+.password-input-container input:not(:placeholder-shown) + label {
+  top: -8px;
+
+  color: #1a73e8;
+
+  font-size: 12px;
+}
+.green input:focus + label,
+.green input:not(:placeholder-shown) + label {
+  color: red;
+}
+
+.get{
+  color: red;
+  font-size: 11px;
+}
+
+
+/* =========================================
+   SHOW PASSWORD
+========================================= */
+
+.show-password {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: 14px;
+
+  color: #3c4043;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.show-password input {
+  width: 18px;
+  height: 18px;
+
+  margin: 0;
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.password-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 40px;
+}
+
+
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
+
+.password-actions .text-button {
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #1a73e8;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   NEXT
+========================================= */
+
+.password-actions .next-button {
+  min-width: 80px;
+
+  height: 40px;
+
+  padding: 0 22px;
+
+  border: none;
+
+  border-radius: 20px;
+
+  background: #1a73e8;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.password-actions .next-button:hover:not(:disabled) {
+  background: #1765cc;
+}
+
+.password-actions .next-button:disabled {
+  background: #9aa0a6;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   LOADER
+========================================= */
+
+.password-loader {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  overflow: hidden;
+
+  background: #e8f0fe;
+}
+
+.password-loader-progress {
+  width: 35%;
+  height: 100%;
+
+  background: #1a73e8;
+
+  animation: passwordProgress 2s ease-in-out forwards;
+}
+
+@keyframes passwordProgress {
+
+  0% {
+    transform: translateX(-120%);
+  }
+
+  50% {
+    transform: translateX(180%);
+  }
+
+  100% {
+    transform: translateX(320%);
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .password-card {
+    grid-template-columns: 1fr;
+
+    padding: 35px 28px;
+  }
+
+  .password-right {
+    padding-left: 0;
+
+    margin-top: 45px;
+  }
+
+}
+
+/* =========================================
+   PESAMS RECOVERY PAGE
+========================================= */
+
+.recovery-page {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f8f9fa;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.recovery-card {
+  position: relative;
+
+  width: min(1040px, 100%);
+
+  min-height: 500px;
+
+  background: #ffffff;
+
+  border: 1px solid #dadce0;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   TOP PROGRESS LINE
+========================================= */
+
+.recovery-loader {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: #e8f0fe;
+}
+
+.recovery-loader::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -30%;
+
+  width: 30%;
+  height: 4px;
+
+  background: #1a73e8;
+
+  animation: recoveryLoading 2s ease-in-out infinite;
+}
+
+@keyframes recoveryLoading {
+
+  0% {
+    left: -30%;
+  }
+
+  50% {
+    left: 50%;
+  }
+
+  100% {
+    left: 100%;
+  }
+
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.recovery-content {
+  padding: 40px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   PESAMS BRAND
+========================================= */
+
+.google-logo {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #1a73e8;
+
+  color: #ffffff;
+
+  border-radius: 50%;
+
+  font-size: 22px;
+
+  font-weight: 600;
+
+  margin-bottom: 25px;
+}
+
+.google-logo::after {
+  content: "PESAMS";
+
+  position: absolute;
+
+  margin-left: 115px;
+
+  color: #1a73e8;
+
+  font-size: 18px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.recovery-title {
+  margin: 0;
+
+  color: #202124;
+
+  font-size: 40px;
+
+  font-weight: 400;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+.account-pill {
+  width: fit-content;
+
+  max-width: 100%;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 18px;
+
+  padding: 5px 10px 5px 6px;
+
+  border: 1px solid #dadce0;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  color: #3c4043;
+
+  font-size: 14px;
+}
+
+.account-icon {
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f1f3f4;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   RECOVERY BODY
+========================================= */
+
+.recovery-body {
+  display: flex;
+
+
+
+  gap: 60px;
+
+  margin-top: 55px;
+}
+
+
+/* =========================================
+   LEFT CONTENT
+========================================= */
+
+.recovery-left {
+  min-width: 0;
+}
+
+.recovery-left h2 {
+  margin: 0 0 12px;
+
+  color: #202124;
+
+  font-size: 22px;
+
+  font-weight: 400;
+}
+
+.recovery-left p {
+  margin: 0 0 28px;
+
+  color: #5f6368;
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   PHONE INPUT
+========================================= */
+
+.phone-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #3c4043;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+.signin-input {
+  width: 100%;
+
+  height: 56px;
+
+  padding: 0 15px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #747775;
+
+  border-radius: 4px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #202124;
+
+  font-size: 16px;
+}
+
+.signin-input:focus {
+  border: 2px solid #1a73e8;
+
+  padding-left: 14px;
+}
+
+.signin-input::placeholder {
+  color: #80868b;
+}
+
+.center{
+  text-align: center;
+  line-height: 1.0px;
+  font-weight: 500;
+  font-size: 36px;
+}
+
+.letin{
+  /* text-align: center; */
+  /* line-height: 1.0px; */
+
+  font-size: 32px;
+  
+  font-weight: 500;
+  /* font-size: px; */
+}
+
+.textt{
+  /* text-align: center; */
+  line-height: 1.5;
+
+  /* font-size: 20px; */
+  
+  /* font-weight: 500; */
+  /* font-size: px; */
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.form-error {
+  margin-top: 8px !important;
+
+  margin-bottom: 0 !important;
+
+  color: #d93025 !important;
+
+  font-size: 13px !important;
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.recovery-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 30px;
+
+  margin-top: 45px;
+}
+
+.text-button {
+  border: none;
+
+  background: transparent;
+
+  color: #1a73e8;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+}
+
+.next-button {
+  min-width: 80px;
+
+  height: 40px;
+
+  padding: 0 22px;
+
+  border: none;
+
+  border-radius: 20px;
+
+  background: #1a73e8;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.next-button:hover:not(:disabled) {
+  background: #1765cc;
+}
+
+.next-button:disabled {
+  background: #a8c7fa;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   ILLUSTRATION
+========================================= */
+
+.recovery-illustration {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-illustration {
+  width: 150px;
+  height: 250px;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  border: 6px solid #202124;
+
+  border-radius: 24px;
+
+  background: #ffffff;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  background: #f8f9fa;
+
+  border-radius: 14px;
+}
+
+.illustration-circle {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e8f0fe;
+
+  color: #1a73e8;
+
+  font-size: 28px;
+
+  font-weight: 600;
+}
+
+.illustration-line {
+  width: 70px;
+  height: 8px;
+
+  border-radius: 10px;
+
+  background: #dadce0;
+}
+
+.illustration-line.short {
+  width: 45px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .recovery-page {
+    padding: 12px;
+  }
+
+  .recovery-card {
+    border-radius: 20px;
+  }
+
+  .recovery-content {
+    padding: 30px 24px;
+  }
+
+  .recovery-body {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+
+    margin-top: 40px;
+  }
+
+  .recovery-illustration {
+    display: none;
+  }
+
+  .recovery-actions {
+    margin-top: 35px;
+  }
+
+  .recovery-title {
+    font-size: 34px;
+  }
+
+}
+
+/* =========================================
+   PROCESSING STEP
+========================================= */
+
+.processing-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.processing-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: #e8f0fe;
+  overflow: hidden;
+}
+
+.processing-loader-bar {
+  width: 35%;
+  height: 100%;
+
+  background: #1a73e8;
+
+  position: absolute;
+  left: -35%;
+
+  animation: processingBar 1.6s
+    ease-in-out infinite;
+}
+
+@keyframes processingBar {
+  0% {
+    left: -35%;
+  }
+
+  50% {
+    left: 45%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+.processing-content {
+  min-height: 430px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 45px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+}
+
+.processing-content .pesams-brand {
+  align-self: flex-start;
+
+  margin-bottom: 70px;
+}
+
+.processing-spinner {
+  width: 48px;
+  height: 48px;
+
+  margin-bottom: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-circle {
+  width: 40px;
+  height: 40px;
+
+  border: 4px solid #e8eaed;
+  border-top-color: #1a73e8;
+
+  border-radius: 50%;
+
+  animation: processingSpinner 0.9s
+    linear infinite;
+}
+
+@keyframes processingSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.processing-title {
+  margin: 0;
+
+  color: #202124;
+
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.processing-text {
+  max-width: 400px;
+
+  margin-top: 14px;
+
+  color: #5f6368;
+
+  font-size: 15px;
+  line-height: 1.6;
+}
