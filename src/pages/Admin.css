@@ -225,7 +225,7 @@
 
   margin-bottom: 35px;
 
-  color: #1a73e8;
+  color: black;
 
   font-size: 20px;
 
@@ -387,6 +387,35 @@
   background: #1765cc;
 }
 
+.fge{
+  height: 60px;
+  border-radius: 30%;
+}
+
+.gh{
+  color:#a8c7fa;
+}
+
+.ten{
+  display: flex;
+  gap: 20px;
+}
+
+ .header{
+     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:30px;
+
+  }
+
+@media (max-width: 800px) {
+  .headd{
+    display: block;
+  }
+  
+}
+
 @media (max-width: 500px) {
   .admin-login-page {
     padding: 15px;
@@ -395,4 +424,8 @@
   .admin-login-card {
     padding: 30px 24px;
   }
+
+ 
+
+  
 }

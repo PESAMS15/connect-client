@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Admin.css";
 
+import img from "./image.png"
+
 function AdminLogin() {
   const navigate = useNavigate();
 
@@ -38,12 +40,10 @@ function AdminLogin() {
       <div className="admin-login-card">
 
         <div className="admin-brand">
-          <div className="admin-brand-logo">
-            P
-          </div>
+            <img className="fge" src={img} alt="" />
+            <h2>Faya Panel</h2>
 
-          <span>PESAMS</span>
-        </div>
+          </div>
 
         <h1>Admin Sign in</h1>
 
