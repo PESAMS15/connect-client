@@ -429,3 +429,97 @@
 
   
 }
+
+
+/* ============================= */
+/* USER DETAILS */
+/* ============================= */
+
+.user-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid #243756;
+  border-bottom: 1px solid #243756;
+  margin-bottom: 15px;
+}
+
+
+/* ============================= */
+/* DETAIL BUTTON */
+/* ============================= */
+
+.detail-button {
+  border: 1px solid #304665;
+  background: #17243a;
+  color: #dbeafe;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.detail-button:hover {
+  background: #203554;
+  border-color: #3b82f6;
+}
+
+.detail-button:active {
+  transform: scale(0.97);
+}
+
+
+/* ============================= */
+/* DEVICE + BROWSER PILL */
+/* ============================= */
+
+.device-browser-button {
+  border: 1px solid #304665;
+  background: #17243a;
+  color: #dbeafe;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.device-browser-button:hover {
+  background: #203554;
+  border-color: #3b82f6;
+}
+
+.device-browser-button:active {
+  transform: scale(0.97);
+}
+
+
+/* ============================= */
+/* LABEL INSIDE BUTTON */
+/* ============================= */
+
+.detail-label {
+  color: #91a4c3;
+  font-weight: 500;
+}
+
+.detail-value {
+  color: #e8f0fe;
+  font-weight: 500;
+}
+
+
+/* ============================= */
+/* COPIED STATE */
+/* ============================= */
+
+.detail-copied {
+  color: #4ade80;
+  font-weight: 600;
+}
