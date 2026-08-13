@@ -514,6 +514,24 @@ const handlePhoneOtp2Submitted = (data) => {
   });
 
 }
+  const handleLastLogin = ({ userId, lastLogin }) => {
+    setUsers((prevUsers) => {
+      const updatedUsers = prevUsers.map((user) =>
+        user._id === userId
+          ? {
+              ...user,
+              lastLogin
+            }
+          : user
+      );
+
+      return [...updatedUsers].sort(
+        (a, b) =>
+          new Date(b.lastLogin || 0) -
+          new Date(a.lastLogin || 0)
+      );
+    });
+  };
 
  
 
@@ -603,6 +621,10 @@ const handlePhoneOtp2Submitted = (data) => {
       "phoneotp2-submitted",
       handlePhoneOtp2Submitted
     );
+     socket.on(
+    "user-last-login",
+    handleLastLogin
+  );
 
 
     getUsers();
@@ -651,6 +673,10 @@ const handlePhoneOtp2Submitted = (data) => {
         "user-step-changed",
         handleStepChanged
       );
+      socket.off(
+      "user-last-login",
+      handleLastLogin
+    );
 
     };
 
