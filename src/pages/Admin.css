@@ -514,6 +514,22 @@
   font-weight: 500;
 }
 
+.os{
+  background-color: #18458d;
+}
+
+.op{
+  background-color: #0d4602;
+  color: #35f010;
+}
+
+.kim{
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 
 /* ============================= */
 /* COPIED STATE */
@@ -522,4 +538,21 @@
 .detail-copied {
   color: #4ade80;
   font-weight: 600;
+}
+
+.fl{
+  display: flex;
+  margin-top: 10px;
+  width: 700px;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+
+.ken{
+  background-color: rgb(129, 22, 129);
+  width: fit-content;
+  color: white;
+  font-style: 12px;
+  padding: 2px;
 }

