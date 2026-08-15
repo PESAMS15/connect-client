@@ -16,7 +16,6 @@ function Admin() {
   const [showApproveModal, setShowApproveModal] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [copiedField, setCopiedField] = useState(null);
-  const [expandedUsers, setExpandedUsers] = useState({});
 
 const [selectedUser, setSelectedUser] = useState(null);
 
@@ -197,13 +196,6 @@ const timeAgo = (date) => {
   oscillator.stop(
     audioContext.currentTime + 0.55
   );
-};
-
-const toggleUserInfo = (userId) => {
-  setExpandedUsers((prev) => ({
-    ...prev,
-    [userId]: !prev[userId]
-  }));
 };
 
 const copyField = async (field, value) => {
