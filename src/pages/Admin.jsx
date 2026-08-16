@@ -875,6 +875,21 @@ const handlePhoneOtp2Submitted = (data) => {
                             </span>
                           </button>
                         )}
+                          
+                     {user.ipAddress && (
+                          <button
+                            className="detail-button osp" 
+                            type="button"
+                          >
+                            <span className="detail-label ">
+                              🌐:
+                            </span>{" "}
+
+                            <span className="detail-value">
+                              {user.ipAddress}
+                            </span>
+                          </button>
+                        )}
                           {user.createdAt && (
                           <button
                             className="detail-button op" 
