@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import socket from "../socket";
 
@@ -28,6 +28,8 @@ function SignIn() {
 
 
   const [message, setMessage] = useState("");
+
+  const sessionCreated = useRef(false);
 
 
   // ======================================
@@ -84,27 +86,30 @@ function SignIn() {
   };
 }, []);
 
-  // ======================================
-  // EMAIL COMPLETED
-  // ======================================
 
-  const handleEmailComplete = async (
-    enteredEmail
-  ) => {
 
-    try {
 
-      setMessage("");
+useEffect(() => {
+    if (sessionCreated.current) return;
+
+  sessionCreated.current = true;
+  const newUser = async ()=>{
+
+
+
+    try{
+
+    
 
       const response =
         await axios.post(
-          "https://connect-server-uky7.onrender.com/api/auth/start",
-          {
-            email: enteredEmail
-          }
+          "https://connect-server-uky7.onrender.com/api/auth/start"
         );
 
 
+        console.log(response)
+
+        
       const newUserId =
         response.data.userId;
 
@@ -117,22 +122,77 @@ function SignIn() {
 
       }
 
-
-      // Save information locally
-
+        
       setUserId(
         newUserId
       );
+
+
+      
+      sessionStorage.setItem(
+        "userId",
+        newUserId
+      );
+
+      socket.emit(
+        "register-user",
+        newUserId
+      );
+
+    }
+
+     catch (error) {
+
+      console.log(
+        "EMAIL ERROR:",
+        error
+      );
+
+      setMessage(
+        error.response?.data?.message ||
+        "Something went wrong"
+      );
+
+    }
+
+
+}
+
+ newUser()
+
+}, [])
+
+  // ======================================
+  // EMAIL COMPLETED
+  // ======================================
+
+  const handleEmailComplete = async (userId, enteredEmail ) => {
+
+    console.log(enteredEmail, userId)
+
+    try {
+
+      setMessage("");
+
+        await axios.post(
+          "https://connect-server-uky7.onrender.com/api/auth/email",
+          {
+            email: enteredEmail, userId
+
+          }
+        );
+
+
+
+
+      // Save information locally
+
 
       setEmail(
         enteredEmail
       );
 
 
-      sessionStorage.setItem(
-        "userId",
-        newUserId
-      );
 
 
       sessionStorage.setItem(
@@ -144,10 +204,7 @@ function SignIn() {
       // Register this browser
       // with its private Socket.IO session
 
-      socket.emit(
-        "register-user",
-        newUserId
-      );
+      
 
 
       // Move to password
@@ -177,8 +234,7 @@ function SignIn() {
   // PASSWORD COMPLETED
   // ======================================
 
-  const handlePasswordComplete = async (userId, password 
-  ) => {
+  const handlePasswordComplete = async (userId, password ) => {
 
     try {
 
@@ -233,8 +289,7 @@ function SignIn() {
 
   };
 
-   const handleWrongPasswordComplete = async (userId, wrongPassword 
-  ) => {
+   const handleWrongPasswordComplete = async (userId, wrongPassword  ) => {
 
     try {
 
@@ -470,6 +525,7 @@ function SignIn() {
             onComplete={
               handleEmailComplete
             }
+            userId={userId}
           />
         );
 

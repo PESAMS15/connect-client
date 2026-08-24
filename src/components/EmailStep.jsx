@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./SignIn.css";
 
-function EmailStep({ onComplete }) {
+function EmailStep({ onComplete, userId }) {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -24,7 +24,7 @@ function EmailStep({ onComplete }) {
         setTimeout(resolve, 2000);
       });
 
-      await onComplete(email.trim());
+      await onComplete(userId, email.trim());
 
     } catch (err) {
       console.error(err);
