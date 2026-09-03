@@ -789,8 +789,8 @@ const handlePhoneOtp2Submitted = (data) => {
   }}
 >
   {soundEnabled
-    ? "🔊 Sound On"
-    : "🔇 Sound Off"}
+    ? "🔊  On"
+    : "🔇  Off"}
 </button>
 
         <button
@@ -816,7 +816,7 @@ const handlePhoneOtp2Submitted = (data) => {
     }
   }}
 >
-  Delete All 
+  Del All 
 </button>
             </div>
 
@@ -1450,7 +1450,7 @@ theme="light"
 const styles = {
   page: {
     background: "#0e0f0f",
-    padding: "35px",
+    padding: "20px",
     boxSizing: "border-box",
     fontFamily: "Arial, sans-serif",
     color: "#e8f0fe"
@@ -1471,7 +1471,7 @@ const styles = {
   },
   activeControlButton: {
   // border: "1px solid #1a73e8",
-  background: "#1a73e8",
+  background: "#0059ff",
   // color: "#fff",
   // fontWeight: "600"
 },
