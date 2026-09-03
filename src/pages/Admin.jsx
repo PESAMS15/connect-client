@@ -1449,8 +1449,7 @@ theme="light"
 
 const styles = {
   page: {
-    minHeight: "100vh",
-    background: "#0b1220",
+    background: "#0e0f0f",
     padding: "35px",
     boxSizing: "border-box",
     fontFamily: "Arial, sans-serif",
@@ -1533,7 +1532,7 @@ const styles = {
   userGrid: {
     display: "grid",
     gridTemplateColumns:
-      "repeat(auto-fill, minmax(350px, 49%))",
+      "repeat(auto-fill, minmax(320px, 49%))",
     gap: "20px"
   },
 
