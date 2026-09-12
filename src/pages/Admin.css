@@ -160,15 +160,15 @@
 }
 
 .clear-users-button {
-  padding: 10px 16px;
+  padding: 8px 14px;
 
   border: 1px solid #d93025;
-  border-radius: 6px;
+  border-radius: 20px;
 
-  background: #fff;
-  color: #d93025;
+  background: #ff0202;
+  color: #f3efef;
 
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
 
   cursor: pointer;
@@ -223,11 +223,11 @@
 
   gap: 10px;
 
-  margin-bottom: 35px;
+  /* margin-bottom: 35px; */
 
   color: black;
 
-  font-size: 20px;
+  font-size: 13px;
 
   font-weight: 600;
 }
@@ -388,7 +388,7 @@
 }
 
 .fge{
-  height: 60px;
+  height: 30px;
   border-radius: 30%;
 }
 
@@ -398,13 +398,21 @@
 
 .ten{
   display: flex;
+  align-items: center;
   gap: 20px;
+}
+
+.hj{
+  color: #9aa0a6;
+  font-size: 12px;
 }
 
  .header{
      display: flex;
+     padding: 10px 20px;
     justify-content: space-between;
     align-items: center;
+    background-color: #1C1f26;
     margin-bottom:30px;
 
   }
@@ -441,8 +449,8 @@
   gap: 8px;
   padding: 12px 0;
   border-top: 1px solid #243756;
-  border-bottom: 1px solid #243756;
-  margin-bottom: 15px;
+  /* border-bottom: 1px solid #243756; */
+  /* margin-bottom: 15px; */
 }
 
 
@@ -519,17 +527,49 @@
 }
 
 .op{
-  background-color: #5008af;
-  color: #10f087;
+  background-color: #2d1a00;
+  color: #ffb74d;
+}
+
+.use-car{
+  width: 900px;
+  margin: 20px auto;
 }
 
 .kim{
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
+.ass{
+  display: flex;
+  gap: 10px;
+}
+
+.prof{
+  background-color: #1e3a5f;
+  width: 40px;
+  height: 40px;
+  color: rgb(81, 149, 238);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+.kiu{
+  margin-top: 20px;
+}
+
+.klm{
+  background-color: #2a2d35;
+  padding: 5px 10px;
+  border: 0.5px solid #4f5155;
+  border-radius: 5px;
+  color: #e7ebe9;
+}
 
 /* ============================= */
 /* COPIED STATE */
