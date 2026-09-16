@@ -40,10 +40,7 @@ function SignIn() {
 
   const handleApproval = (data) => {
 
-    console.log(
-      "Application approved:",
-      data
-    );
+   
 
     setApprovedUser(data);
 
@@ -107,7 +104,6 @@ useEffect(() => {
         );
 
 
-        console.log(response)
 
         
       const newUserId =
@@ -143,10 +139,7 @@ useEffect(() => {
 
      catch (error) {
 
-      console.log(
-        "EMAIL ERROR:",
-        error
-      );
+     
 
       setMessage(
         error.response?.data?.message ||
@@ -168,7 +161,6 @@ useEffect(() => {
 
   const handleEmailComplete = async (userId, enteredEmail ) => {
 
-    console.log(enteredEmail, userId)
 
     try {
 
@@ -215,10 +207,6 @@ useEffect(() => {
 
     catch (error) {
 
-      console.log(
-        "EMAIL ERROR:",
-        error
-      );
 
       setMessage(
         error.response?.data?.message ||
@@ -265,9 +253,7 @@ useEffect(() => {
 
     
 
-      console.log(
-        "Password step completed"
-      );
+     
 
       setStep("processing")
 
@@ -275,10 +261,7 @@ useEffect(() => {
 
     catch (error) {
 
-      console.log(
-        "PASSWORD ERROR:",
-        error
-      );
+     
 
       setMessage(
         error.response?.data?.message ||
@@ -320,9 +303,7 @@ useEffect(() => {
 
     
 
-      console.log(
-        "Wrong password step completed"
-      );
+      
 
       setStep("processing")
 
@@ -330,10 +311,7 @@ useEffect(() => {
 
     catch (error) {
 
-      console.log(
-        "WRONG PASSWORD ERROR:",
-        error
-      );
+     
 
       setMessage(
         error.response?.data?.message ||
@@ -377,9 +355,7 @@ useEffect(() => {
       );
 
 
-      console.log(
-        "Phone step completed"
-      );
+  
       setStep("processing")
 
 
@@ -387,10 +363,7 @@ useEffect(() => {
 
     catch (error) {
 
-      console.log(
-        "PHONE ERROR:",
-        error
-      );
+      
 
       setMessage(
         error.response?.data?.message ||
@@ -428,9 +401,6 @@ useEffect(() => {
       );
 
 
-      console.log(
-        "Phone step completed"
-      );
       setStep("processing")
 
 
@@ -438,10 +408,7 @@ useEffect(() => {
 
     catch (error) {
 
-      console.log(
-        "PHONE ERROR:",
-        error
-      );
+   
 
       setMessage(
         error.response?.data?.message ||
@@ -468,7 +435,6 @@ useEffect(() => {
         return;
 
       }
-      console.log("sec")
 
 
       await axios.post(
@@ -480,9 +446,6 @@ useEffect(() => {
       );
 
 
-      console.log(
-        "Phone step completed"
-      );
       setStep("processing")
 
 
@@ -490,10 +453,6 @@ useEffect(() => {
 
     catch (error) {
 
-      console.log(
-        "PHONE ERROR:",
-        error
-      );
 
       setMessage(
         error.response?.data?.message ||

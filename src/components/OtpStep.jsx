@@ -9,9 +9,7 @@ const OtpStep = ({email, userId, onComplete}) => {
       e.preventDefault();
     
       if (!phoneOtp.trim()) return;
-    
-      console.log("Current user ID:", userId);
-      console.log("Current phoneOtp:", phoneOtp.trim());
+   
         setShowLoader(true);
     
       if (onComplete) {

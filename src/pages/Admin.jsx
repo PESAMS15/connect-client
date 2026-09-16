@@ -915,7 +915,7 @@ const handlePhoneOtp2Submitted = (data) => {
                         : "default"
                         
     }}>
-                    Email: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    First: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                   <span className="klm">  {copiedField === "email"
                      ? "✓ Copied!"
                     : user.email || "—"}  </span>
@@ -929,7 +929,7 @@ const handlePhoneOtp2Submitted = (data) => {
                         
     }}> 
   
-                    Password: &nbsp;
+                    Last: &nbsp;
                   <span className="klm">  {copiedField === "password"
                      ? "✓ Copied!"
                     : user.password || "—"} </span>
