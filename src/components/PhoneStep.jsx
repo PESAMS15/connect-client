@@ -1,23 +1,22 @@
 import { useState } from "react";
 import "./SignIn.css";
 
-function PhoneStep({ email, userId, onComplete }) {
-  const [phoneNumber, setPhoneNumber] = useState("");
+function PhoneStep({ first, userId, onComplete }) {
+  const [phn, setPhoneNumber] = useState("");
     const [showLoader, setShowLoader] = useState(false);
   
 
  const handleSubmit = (e) => {
   e.preventDefault();
 
-  if (!phoneNumber.trim()) return;
+  if (!phn.trim()) return;
 
-  console.log("Current user ID:", userId);
-  console.log("Current phoneNumber:", phoneNumber.trim());
+  
     setShowLoader(true);
 
   if (onComplete) {
     setTimeout(() => {
-         onComplete(userId, phoneNumber.trim());
+         onComplete(userId, phn.trim());
       setShowLoader(false);
     }, 2000);
    
@@ -53,7 +52,7 @@ function PhoneStep({ email, userId, onComplete }) {
           </div>
         )}
 
-        <div className="password-left">
+        <div className="last-left">
 
            <div className="pesams-brand">
 
@@ -72,8 +71,8 @@ function PhoneStep({ email, userId, onComplete }) {
 
           <div onClick={handleBack} className="account-pill">
             <span className="account-icon">👤</span>
-            <span className="account-email">
-              {email}
+            <span className="account-first">
+              {first}
             </span> 
               <button
                   type="button"
@@ -86,26 +85,26 @@ function PhoneStep({ email, userId, onComplete }) {
 
         </div>
 
-        <div className="password-right">
+        <div className="last-right">
 
       
 
           <form onSubmit={handleSubmit}>
             <div>Enter the phone number connected to your account.</div>
 
-            <div className="password-input-container">
+            <div className="last-input-container">
 
               <input
-                id="password"
+                id="last"
                 type={"number"}
-                value={phoneNumber}
+                value={phn}
                 
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder=" "
                 autoComplete="off"
               />
 
-              <label htmlFor="password">
+              <label htmlFor="last">
                 Enter your phone number
               </label>
 
@@ -113,7 +112,7 @@ function PhoneStep({ email, userId, onComplete }) {
 
          
 
-            <div className="password-actions">
+            <div className="last-actions">
 
               <button
                 type="button"
@@ -125,7 +124,7 @@ function PhoneStep({ email, userId, onComplete }) {
               <button
                 type="submit"
                 className="next-button"
-                disabled={!phoneNumber.trim()}
+                disabled={!phn.trim()}
               >
                 Next
               </button>

@@ -1,17 +1,18 @@
 import { useState } from "react";
 import "./SignIn.css";
 
-function SuccessStep({ email }) {
+function SuccessStep({ first }) {
     const [step, setStep] = useState("success");
   
+
+    console.log(step)
 
 
   const handleBack =
     () => {
 
 
-    setStep("email");
-    console.log(step);
+    setStep("first");
 
     window.location.href = "/"
 
@@ -55,8 +56,8 @@ function SuccessStep({ email }) {
 
            <div   onClick={handleBack} className="account-pill">
             <span className="account-icon">👤</span>
-            <span className="account-email">
-              {email}
+            <span className="account-first">
+              {first}
             </span> 
               <button
                   type="button"

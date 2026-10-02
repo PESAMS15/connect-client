@@ -467,10 +467,10 @@ body {
 }
 
 /* =========================================
-   PASSWORD CARD
+   last CARD
 ========================================= */
 
-.password-card {
+.last-card {
   position: relative;
 
   display: grid;
@@ -494,7 +494,7 @@ body {
    LEFT SIDE
 ========================================= */
 
-.password-left {
+.last-left {
   display: flex;
 
   flex-direction: column;
@@ -507,7 +507,7 @@ body {
    PESAMS
 ========================================= */
 
-.password-left .pesams-brand {
+.last-left .pesams-brand {
   display: flex;
 
   align-items: center;
@@ -517,7 +517,7 @@ body {
   margin-bottom: 28px;
 }
 
-.password-left .pesams-logo {
+.last-left .pesams-logo {
   width: 40px;
   height: 40px;
 
@@ -537,7 +537,7 @@ body {
   font-weight: 600;
 }
 
-.password-left .pesams-brand span {
+.last-left .pesams-brand span {
   color: #1a73e8;
 
   font-size: 18px;
@@ -552,7 +552,7 @@ body {
    WELCOME
 ========================================= */
 
-.password-left .signin-title {
+.last-left .signin-title {
   margin: 0;
 
   color: #202124;
@@ -569,7 +569,7 @@ body {
    ACCOUNT
 ========================================= */
 
-.password-left .account-pill {
+.last-left .account-pill {
   display: flex;
 
   align-items: center;
@@ -591,7 +591,7 @@ body {
   font-size: 14px;
 }
 
-.password-left .account-icon {
+.last-left .account-icon {
   width: 25px;
   height: 25px;
 
@@ -607,7 +607,7 @@ body {
   font-size: 12px;
 }
 
-.password-left .account-email {
+.last-left .account-email {
   max-width: 240px;
 
   overflow: hidden;
@@ -622,7 +622,7 @@ body {
    RIGHT SIDE
 ========================================= */
 
-.password-right {
+.last-right {
   display: flex;
 
   flex-direction: column;
@@ -637,7 +637,7 @@ body {
    HEADING
 ========================================= */
 
-.password-heading {
+.last-heading {
   margin: 0 0 24px;
 
   color: #202124;
@@ -652,7 +652,7 @@ body {
    INPUT
 ========================================= */
 
-.password-input-container {
+.last-input-container {
   position: relative;
   margin-top: 20px;
     
@@ -660,7 +660,7 @@ body {
 }
 
 
-.password-input-container input {
+.last-input-container input {
   width: 100%;
 
   height: 56px;
@@ -691,11 +691,11 @@ body {
 
 
 
-.password-input-container input:hover {
+.last-input-container input:hover {
   border-color: #202124;
 }
 
-.password-input-container input:focus {
+.last-input-container input:focus {
   border: 2px solid #1a73e8;
 }
 
@@ -714,7 +714,7 @@ body {
    FLOATING LABEL
 ========================================= */
 
-.password-input-container label {
+.last-input-container label {
   position: absolute;
 
   left: 12px;
@@ -733,8 +733,8 @@ body {
   transition: .15s ease;
 }
 
-.password-input-container input:focus + label,
-.password-input-container input:not(:placeholder-shown) + label {
+.last-input-container input:focus + label,
+.last-input-container input:not(:placeholder-shown) + label {
   top: -8px;
 
   color: #1a73e8;
@@ -753,10 +753,10 @@ body {
 
 
 /* =========================================
-   SHOW PASSWORD
+   SHOW last
 ========================================= */
 
-.show-password {
+.show-last {
   display: flex;
 
   align-items: center;
@@ -772,7 +772,7 @@ body {
   cursor: pointer;
 }
 
-.show-password input {
+.show-last input {
   width: 18px;
   height: 18px;
 
@@ -784,7 +784,7 @@ body {
    ACTIONS
 ========================================= */
 
-.password-actions {
+.last-actions {
   display: flex;
 
   align-items: center;
@@ -796,10 +796,10 @@ body {
 
 
 /* =========================================
-   FORGOT PASSWORD
+   FORGOT last
 ========================================= */
 
-.password-actions .text-button {
+.last-actions .text-button {
   padding: 0;
 
   border: 0;
@@ -820,7 +820,7 @@ body {
    NEXT
 ========================================= */
 
-.password-actions .next-button {
+.last-actions .next-button {
   min-width: 80px;
 
   height: 40px;
@@ -842,11 +842,11 @@ body {
   cursor: pointer;
 }
 
-.password-actions .next-button:hover:not(:disabled) {
+.last-actions .next-button:hover:not(:disabled) {
   background: #1765cc;
 }
 
-.password-actions .next-button:disabled {
+.last-actions .next-button:disabled {
   background: #9aa0a6;
 
   cursor: not-allowed;
@@ -857,7 +857,7 @@ body {
    LOADER
 ========================================= */
 
-.password-loader {
+.last-loader {
   position: absolute;
 
   top: 0;
@@ -871,7 +871,7 @@ body {
   background: #e8f0fe;
 }
 
-.password-loader-progress {
+.last-loader-progress {
   width: 35%;
   height: 100%;
 
@@ -903,13 +903,13 @@ body {
 
 @media (max-width: 700px) {
 
-  .password-card {
+  .last-card {
     grid-template-columns: 1fr;
 
     padding: 35px 28px;
   }
 
-  .password-right {
+  .last-right {
     padding-left: 0;
 
     margin-top: 45px;

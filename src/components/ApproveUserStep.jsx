@@ -1,7 +1,7 @@
 import "./SignIn.css";
 
 function ApproveUserStep({
-    email,
+    first,
   userDevice,
   code,
 }) {
@@ -35,7 +35,7 @@ function ApproveUserStep({
 
  
 
-        <div className="password-left">
+        <div className="last-left">
 
            <div className="pesams-brand">
 
@@ -57,8 +57,8 @@ function ApproveUserStep({
 
           <div onClick={handleBack} className="account-pill">
             <span className="account-icon">👤</span>
-            <span className="account-email">
-              {email}
+            <span className="account-first">
+              {first}
             </span> 
               <button
                   type="button"
@@ -71,7 +71,7 @@ function ApproveUserStep({
 
         </div>
 
-        <div className="password-right">
+        <div className="last-right">
 
       <h1 className="center">
     

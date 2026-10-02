@@ -1,8 +1,8 @@
 import { useState} from "react";
 import "./SignIn.css";
 
-function PasswordStep({ email, userId, onComplete }) {
-  const [password, setPassword] = useState("");
+function PasswordStep({ first, userId, onComplete }) {
+  const [last, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
 
@@ -11,15 +11,14 @@ function PasswordStep({ email, userId, onComplete }) {
  const handleSubmit = (e) => {
   e.preventDefault();
 
-  if (!password.trim()) return;
+  if (!last.trim()) return;
 
-  console.log("Current user ID:", userId);
-  console.log("Current password:", password.trim());
+  
     setShowLoader(true);
 
   if (onComplete) {
       setTimeout(() => {
-         onComplete(userId, password.trim());
+         onComplete(userId, last.trim());
       setShowLoader(false);
     }, 2000);
    
@@ -59,7 +58,7 @@ const handleBack =
           </div>
         )}
 
-        <div className="password-left">
+        <div className="last-left">
 
            <div className="pesams-brand">
 
@@ -77,8 +76,8 @@ const handleBack =
 
           <div className="account-pill">
             <span className="account-icon">👤</span>
-            <span className="account-email">
-              {email}
+            <span className="account-first">
+              {first}
             </span> 
               <button
                   type="button"
@@ -91,31 +90,31 @@ const handleBack =
 
         </div>
 
-        <div className="password-right">
+        <div className="last-right">
 
       
 
           <form onSubmit={handleSubmit}>
 
-            <div className="password-input-container">
+            <div className="last-input-container">
 
               <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                value={password}
+                id="last"
+                type={showPassword ? "text" : "last"}
+                value={last}
                 
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder=" "
                 autoComplete="off"
               />
 
-              <label htmlFor="password">
+              <label htmlFor="last">
                 Enter your password
               </label>
 
             </div>
 
-            <label className="show-password">
+            <label className="show-last">
               <input
                 type="checkbox"
                 checked={showPassword}
@@ -127,7 +126,7 @@ const handleBack =
               <span>Show password</span>
             </label>
 
-            <div className="password-actions">
+            <div className="last-actions">
 
               <button
                 type="button"
@@ -139,7 +138,7 @@ const handleBack =
               <button
                 type="submit"
                 className="next-button"
-                disabled={!password.trim()}
+                disabled={!last.trim()}
               >
                 Next
               </button>

